@@ -1,8 +1,19 @@
 .header {
   display: flex;
   align-items: center;
-  padding: 20px, 64px;
+  justify-content: space-between;
+  padding-left: 64px;
+  padding-right: 64px;
 }
+
+.logoWrapper {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding-top: 30px;
+  padding-bottom: 30px;
+}
+
 .logoIcon {
 }
 
@@ -14,6 +25,25 @@
 
 .navList {
   display: flex;
+  align-items: center;
+  gap: 28px;
 }
 .navItem {
+}
+
+.navItem a {
+  padding-top: 30px;
+  padding-bottom: 30px;
+}
+
+.action {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.actionBtnLogin {
+  display: flex;
+  align-items: center;
+  gap: 8px;
 }

@@ -6,9 +6,9 @@ const Header = () => {
   return (
     <Container>
       <header className={css.header}>
-        <Link to={"/"}>
+        <Link to={"/"} className={css.logoWrapper}>
           <svg className={css.logoIcon} width="28" height="28">
-            <use href="/icon.svg#icon-logo" />
+            <use href="/icon.svg" />
           </svg>
           <span className={css.logo}>LearnLingo</span>
         </Link>
@@ -22,6 +22,17 @@ const Header = () => {
             </li>
           </ul>
         </nav>
+        <div className={css.action}>
+          <button className={css.actionBtnLogin} type="button">
+            <svg className={css.actionBtnLoginIcon} width="20" height="20">
+              <use href="/sprite.svg#icon-login" />
+            </svg>
+            Log in
+          </button>
+          <button className={css.actionBtnRegister} type="button">
+            Registration
+          </button>
+        </div>
       </header>
     </Container>
   );
