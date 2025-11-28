@@ -47,3 +47,15 @@
   align-items: center;
   gap: 8px;
 }
+
+.actionBtnLoginIcon {
+}
+
+.actionBtnRegister {
+  color: #fff;
+  border-radius: 12px;
+  padding: 14px 39px;
+  width: 166px;
+  height: 48px;
+  background: #121417;
+}
