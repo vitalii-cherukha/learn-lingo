@@ -49,6 +49,8 @@
 }
 
 .actionBtnLoginIcon {
+  fill: none;
+  stroke: #121417;
 }
 
 .actionBtnRegister {
@@ -58,4 +60,11 @@
   width: 166px;
   height: 48px;
   background: #121417;
+}
+
+/* Styles for Tablet devices */
+@media only screen and (min-width: 768px) {
+}
+/* Styles for Desktop devices */
+@media only screen and (min-width: 1440px) {
 }
