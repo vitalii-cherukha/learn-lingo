@@ -48,6 +48,7 @@
   .navItem a {
     padding-top: 30px;
     padding-bottom: 30px;
+    line-height: 1.25;
   }
 
   .action {
@@ -60,22 +61,42 @@
     display: flex;
     align-items: center;
     gap: 8px;
+    font-weight: 700;
+
+    line-height: 125%;
   }
 
   .actionBtnLoginIcon {
     fill: none;
-    stroke: #121417;
+    stroke: var(--color-profile);
   }
 
   .actionBtnRegister {
     color: #fff;
     border-radius: 12px;
-    padding: 14px 39px;
-    width: 166px;
+    width: 145px;
     height: 48px;
     background: #121417;
+    font-weight: 700;
+    line-height: 125%;
+    transition: background 250ms linear, transform 250ms linear;
+  }
+
+  .actionBtnRegister:hover,
+  .actionBtnRegister:focus {
+    background: #2b2d31;
+    transform: translateY(-1px);
+  }
+
+  .actionBtnRegister:active {
+    background: #121417;
+    transform: scale(0.96) translateY(0);
   }
 }
 /* Styles for Desktop devices */
 @media only screen and (min-width: 1440px) {
+  .actionBtnRegister {
+    width: 166px;
+    height: 48px;
+  }
 }
