@@ -43,12 +43,22 @@
     gap: 28px;
   }
   .navItem {
+    transition: transform 250ms linear;
   }
 
   .navItem a {
     padding-top: 30px;
     padding-bottom: 30px;
     line-height: 1.25;
+  }
+
+  .navItem:hover,
+  .navItem:focus {
+    transform: translateY(-1px);
+  }
+
+  .navItem:active {
+    transform: scale(0.96) translateY(0);
   }
 
   .action {
@@ -62,8 +72,17 @@
     align-items: center;
     gap: 8px;
     font-weight: 700;
-
     line-height: 125%;
+    transition: transform 250ms linear;
+  }
+
+  .actionBtnLogin:hover,
+  .actionBtnLogin:focus {
+    transform: translateY(-1px);
+  }
+
+  .actionBtnLogin:active {
+    transform: scale(0.96) translateY(0);
   }
 
   .actionBtnLoginIcon {
