@@ -22,53 +22,59 @@
 .logoIcon {
 }
 
-.logo {
+.logoText {
 }
-
 .nav {
+  display: none;
 }
-
-.navList {
-  display: flex;
-  align-items: center;
-  gap: 28px;
-}
-.navItem {
-}
-
-.navItem a {
-  padding-top: 30px;
-  padding-bottom: 30px;
-}
-
 .action {
-  display: flex;
-  align-items: center;
-  gap: 16px;
-}
-
-.actionBtnLogin {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-}
-
-.actionBtnLoginIcon {
-  fill: none;
-  stroke: #121417;
-}
-
-.actionBtnRegister {
-  color: #fff;
-  border-radius: 12px;
-  padding: 14px 39px;
-  width: 166px;
-  height: 48px;
-  background: #121417;
+  display: none;
 }
 
 /* Styles for Tablet devices */
 @media only screen and (min-width: 768px) {
+  .nav {
+    display: block;
+  }
+
+  .navList {
+    display: flex;
+    align-items: center;
+    gap: 28px;
+  }
+  .navItem {
+  }
+
+  .navItem a {
+    padding-top: 30px;
+    padding-bottom: 30px;
+  }
+
+  .action {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+
+  .actionBtnLogin {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .actionBtnLoginIcon {
+    fill: none;
+    stroke: #121417;
+  }
+
+  .actionBtnRegister {
+    color: #fff;
+    border-radius: 12px;
+    padding: 14px 39px;
+    width: 166px;
+    height: 48px;
+    background: #121417;
+  }
 }
 /* Styles for Desktop devices */
 @media only screen and (min-width: 1440px) {

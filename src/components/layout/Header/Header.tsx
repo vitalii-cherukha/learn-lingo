@@ -1,16 +1,17 @@
 import { Link } from "react-router";
 import Container from "../Container/Container";
 import css from "./Header.module.css";
+import BurgerMenu from "../../common/BurgerMenu/BurgerMenu";
 
 const Header = () => {
   return (
     <Container>
       <header className={css.header}>
         <Link to={"/"} className={css.logoWrapper}>
-          <svg className={css.logoIcon} width="28" height="28">
+          <svg className={css.logoIcon} width="32" height="32">
             <use href="/icon.svg" />
           </svg>
-          <span className={css.logo}>LearnLingo</span>
+          <span className={css.logoText}>LearnLingo</span>
         </Link>
         <nav className={css.nav}>
           <ul className={css.navList}>
@@ -33,6 +34,7 @@ const Header = () => {
             Registration
           </button>
         </div>
+        <BurgerMenu />
       </header>
     </Container>
   );
