@@ -79,6 +79,10 @@
     transition: transform 250ms linear;
   }
 
+  .actionBtnLogin svg {
+    transition: stroke 250ms linear;
+  }
+
   .actionBtnLogin:hover,
   .actionBtnLogin:focus {
     transform: translateY(-1px);
@@ -86,6 +90,15 @@
 
   .actionBtnLogin:active {
     transform: scale(0.96) translateY(0);
+  }
+
+  .actionBtnLogin:hover svg,
+  .actionBtnLogin:focus svg {
+    stroke: var(--color-profile-second);
+  }
+
+  .actionBtnLogin:active svg {
+    stroke: var(--color-profile);
   }
 
   .actionBtnLoginIcon {
