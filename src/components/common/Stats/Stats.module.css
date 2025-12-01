@@ -1,0 +1,86 @@
+.statsWrapper {
+  margin-top: 24px;
+  padding: 22px 32px;
+  background-image: url("/public/dashed-border-mobile.svg");
+  background-repeat: no-repeat;
+  background-size: contain;
+  margin-bottom: 50px;
+}
+
+.list {
+  display: flex;
+  gap: 50px;
+  flex-wrap: wrap;
+  justify-content: space-around;
+}
+
+.item {
+  display: flex;
+  gap: 16px;
+  align-items: center;
+}
+
+.itemTitle {
+  white-space: nowrap;
+  font-weight: 500;
+  font-size: 28px;
+  line-height: 1.14;
+  letter-spacing: -0.02em;
+}
+
+.itemText {
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 129%;
+  letter-spacing: -0.02em;
+  color: rgba(18, 20, 23, 0.7);
+}
+
+/* Styles for Tablet devices */
+@media only screen and (min-width: 768px) {
+  .statsWrapper {
+    background-image: url("/public/dashed-border-tablet.svg");
+    padding: 30px 45px;
+  }
+
+  .list {
+    display: flex;
+    gap: 100px;
+  }
+
+  .item {
+    display: flex;
+    gap: 16px;
+  }
+
+  .itemTitle {
+  }
+
+  .itemText {
+    max-width: 96px;
+  }
+}
+/* Styles for Desktop devices */
+@media only screen and (min-width: 1440px) {
+  .statsWrapper {
+    background-image: url("/public/dashed-border.svg");
+    padding: 40px 123px;
+  }
+  .list {
+    display: flex;
+    gap: 100px;
+    flex-wrap: nowrap;
+  }
+
+  .item {
+    display: flex;
+    gap: 16px;
+  }
+
+  .itemTitle {
+  }
+
+  .itemText {
+    max-width: 96px;
+  }
+}
