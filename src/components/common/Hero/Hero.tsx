@@ -5,7 +5,7 @@ const Hero = () => {
     <div className={css.heroWrapper}>
       <div className={css.titleWrapper}>
         <h1 className={css.title}>
-          Unlock your potential with the best
+          Unlock your potential with the best &nbsp;
           <span className={css.titleSpan}>language</span> tutors
         </h1>
         <p className={css.titleText}>
@@ -16,7 +16,11 @@ const Hero = () => {
         <button className={css.titleBtn}>Get started</button>
       </div>
       <div className={css.imgWrapper}>
-        <img src="/public/user/user-yellow@2x.webp" alt="User" />
+        <img
+          className={css.img}
+          src="/public/user/user-yellow@2x.webp"
+          alt="User"
+        />
       </div>
     </div>
   );
