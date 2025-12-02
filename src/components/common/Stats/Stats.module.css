@@ -1,9 +1,11 @@
 .statsWrapper {
+  color: red;
+
   margin-top: 24px;
   padding: 22px 32px;
   background-image: url("/public/dashed-border-mobile.svg");
   background-repeat: no-repeat;
-  background-size: contain;
+  background-size: 100% 100%;
   margin-bottom: 50px;
 }
 
@@ -21,6 +23,7 @@
 }
 
 .itemTitle {
+  color: #121417;
   white-space: nowrap;
   font-weight: 500;
   font-size: 28px;
@@ -34,6 +37,9 @@
   line-height: 129%;
   letter-spacing: -0.02em;
   color: rgba(18, 20, 23, 0.7);
+}
+
+.icon-dashed-border {
 }
 
 /* Styles for Tablet devices */

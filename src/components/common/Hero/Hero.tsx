@@ -16,11 +16,7 @@ const Hero = () => {
         <button className={css.titleBtn}>Get started</button>
       </div>
       <div className={css.imgWrapper}>
-        <img
-          className={css.img}
-          src="/public/user/user-yellow@2x.webp"
-          alt="User"
-        />
+        <img className={css.img} src="/user/user-yellow@2x.webp" alt="User" />
       </div>
     </div>
   );
