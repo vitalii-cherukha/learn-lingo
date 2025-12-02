@@ -1,7 +1,7 @@
 import { Link } from "react-router";
 import Container from "../Container/Container";
 import css from "./Header.module.css";
-import BurgerMenu from "../../common/BurgerMenu/BurgerMenu";
+
 import { useState } from "react";
 
 const Header = () => {
@@ -82,7 +82,53 @@ const Header = () => {
           </button>
         )}
       </header>
-      {isOpenBurgerMenu && <BurgerMenu />}
+      {isOpenBurgerMenu && (
+        <div className={css.burgerMenuWrapper}>
+          <nav className={css.burgerMenuNav}>
+            <ul className={css.burgerMenuNavList}>
+              <li className={css.burgerMenuNavItem}>
+                <Link to="/">Home</Link>
+              </li>
+              <li className={css.burgerMenuNavItem}>
+                <Link to="/teachers">Teachers</Link>
+              </li>
+              {isAuthorized && (
+                <li className={css.burgerMenuNavItem}>
+                  <Link to="/favorites">Favorites</Link>
+                </li>
+              )}
+            </ul>
+          </nav>
+          <div className={css.burgerMenuAction}>
+            {isAuthorized ? (
+              <button className={css.burgerMenuActionBtnLogin} type="button">
+                <svg
+                  className={css.burgerMenuActionBtnLoginIcon}
+                  width="20"
+                  height="20"
+                >
+                  <use href="/sprite.svg#icon-logout" />
+                </svg>
+                Log out
+              </button>
+            ) : (
+              <button className={css.burgerMenuActionBtnLogin} type="button">
+                <svg
+                  className={css.burgerMenuActionBtnLoginIcon}
+                  width="20"
+                  height="20"
+                >
+                  <use href="/sprite.svg#icon-login" />
+                </svg>
+                Log in
+              </button>
+            )}
+            <button className={css.burgerMenuActionBtnRegister} type="button">
+              Registration
+            </button>
+          </div>
+        </div>
+      )}
     </Container>
   );
 };
