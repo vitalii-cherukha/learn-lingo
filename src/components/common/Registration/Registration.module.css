@@ -1,0 +1,38 @@
+.registrationWrapper {
+  position: relative;
+  padding: 20px;
+}
+
+.title {
+  margin-bottom: 20px;
+  font-weight: 500;
+  font-size: 40px;
+  line-height: 120%;
+  letter-spacing: -0.02em;
+}
+
+.text {
+  margin-bottom: 40px;
+  line-height: 137%;
+  color: rgba(18, 20, 23, 0.8);
+}
+
+.closeIcon {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  stroke: var(--color-primary);
+}
+
+/* Styles for Tablet devices */
+@media only screen and (min-width: 768px) {
+  .registrationWrapper {
+    padding: 44px;
+  }
+}
+/* Styles for Desktop devices */
+@media only screen and (min-width: 1440px) {
+  .registrationWrapper {
+    padding: 64px;
+  }
+}

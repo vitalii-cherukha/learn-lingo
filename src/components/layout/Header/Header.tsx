@@ -3,10 +3,12 @@ import Container from "../Container/Container";
 import css from "./Header.module.css";
 
 import { useState } from "react";
+import Registration from "../../common/Registration/Registration";
 
 const Header = () => {
   const [isAuthorized, setIsAuthorized] = useState(false);
   const [isOpenBurgerMenu, setIsOpenBurgerMenu] = useState(false);
+  const [isOpenRegistration, setIsOpenRegistration] = useState(false);
 
   const handleCloseClick = () => {
     setIsOpenBurgerMenu(false);
@@ -56,7 +58,11 @@ const Header = () => {
               Log in
             </button>
           )}
-          <button className={css.actionBtnRegister} type="button">
+          <button
+            onClick={() => setIsOpenRegistration(true)}
+            className={css.actionBtnRegister}
+            type="button"
+          >
             Registration
           </button>
         </div>
@@ -76,7 +82,7 @@ const Header = () => {
             onClick={handleCloseClick}
             className={css.burgerMenuBtn}
           >
-            <svg className={css.burgerMenuIcon} width="35" height="35">
+            <svg className={css.burgerMenuIcon} width="32" height="32">
               <use href="/sprite.svg#icon-cancel" />
             </svg>
           </button>
@@ -142,7 +148,10 @@ const Header = () => {
                 Log in
               </button>
               <button
-                onClick={handleCloseClick}
+                onClick={() => {
+                  setIsOpenRegistration(true);
+                  handleCloseClick();
+                }}
                 className={css.burgerMenuActionBtnRegister}
                 type="button"
               >
@@ -152,6 +161,11 @@ const Header = () => {
           )}
         </div>
       </div>
+
+      <Registration
+        isOpen={isOpenRegistration}
+        onClose={() => setIsOpenRegistration(false)}
+      />
     </Container>
   );
 };
