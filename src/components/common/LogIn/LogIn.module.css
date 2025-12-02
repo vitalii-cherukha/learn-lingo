@@ -1,0 +1,47 @@
+.logInWrapper {
+  position: relative;
+  padding: 15px;
+}
+
+.title {
+  margin-bottom: 20px;
+  font-weight: 500;
+  font-size: 30px;
+  line-height: 120%;
+  letter-spacing: -0.02em;
+}
+
+.text {
+  margin-bottom: 40px;
+  line-height: 137%;
+  color: rgba(18, 20, 23, 0.8);
+}
+
+.closeIcon {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  stroke: var(--color-primary);
+}
+
+/* Styles for Tablet devices */
+@media only screen and (min-width: 768px) {
+  .logInWrapper {
+    padding: 44px;
+  }
+
+  .title {
+    font-size: 40px;
+  }
+
+  .closeIcon {
+    top: 20px;
+    right: 20px;
+  }
+}
+/* Styles for Desktop devices */
+@media only screen and (min-width: 1440px) {
+  .logInWrapper {
+    padding: 64px;
+  }
+}

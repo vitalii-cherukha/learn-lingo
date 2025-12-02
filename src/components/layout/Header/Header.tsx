@@ -4,11 +4,13 @@ import css from "./Header.module.css";
 
 import { useState } from "react";
 import Registration from "../../common/Registration/Registration";
+import LogIn from "../../common/LogIn/LogIn";
 
 const Header = () => {
   const [isAuthorized, setIsAuthorized] = useState(false);
   const [isOpenBurgerMenu, setIsOpenBurgerMenu] = useState(false);
   const [isOpenRegistration, setIsOpenRegistration] = useState(false);
+  const [isOpenLogIn, setIsOpenLogIn] = useState(false);
 
   const handleCloseClick = () => {
     setIsOpenBurgerMenu(false);
@@ -51,7 +53,11 @@ const Header = () => {
               Log out
             </button>
           ) : (
-            <button className={css.actionBtnLogin} type="button">
+            <button
+              onClick={() => setIsOpenLogIn(true)}
+              className={css.actionBtnLogin}
+              type="button"
+            >
               <svg className={css.actionBtnLoginIcon} width="20" height="20">
                 <use href="/sprite.svg#icon-login" />
               </svg>
@@ -134,7 +140,10 @@ const Header = () => {
           ) : (
             <>
               <button
-                onClick={handleCloseClick}
+                onClick={() => {
+                  setIsOpenLogIn(true);
+                  handleCloseClick();
+                }}
                 className={css.burgerMenuActionBtnLogin}
                 type="button"
               >
@@ -166,6 +175,7 @@ const Header = () => {
         isOpen={isOpenRegistration}
         onClose={() => setIsOpenRegistration(false)}
       />
+      <LogIn isOpen={isOpenLogIn} onClose={() => setIsOpenLogIn(false)} />
     </Container>
   );
 };
