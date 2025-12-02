@@ -8,7 +8,7 @@ const Header = () => {
   const [isAuthorized, setIsAuthorized] = useState(false);
   const [isOpenBurgerMenu, setIsOpenBurgerMenu] = useState(false);
 
-  const handleClick = () => {
+  const handleCloseClick = () => {
     if (!isOpenBurgerMenu) {
       setIsOpenBurgerMenu(true);
     } else {
@@ -63,7 +63,7 @@ const Header = () => {
         {!isOpenBurgerMenu ? (
           <button
             type="button"
-            onClick={handleClick}
+            onClick={handleCloseClick}
             className={css.burgerMenuBtn}
           >
             <svg className={css.burgerMenuIcon} width="35" height="35">
@@ -73,7 +73,7 @@ const Header = () => {
         ) : (
           <button
             type="button"
-            onClick={handleClick}
+            onClick={handleCloseClick}
             className={css.burgerMenuBtn}
           >
             <svg className={css.burgerMenuIcon} width="35" height="35">
@@ -82,53 +82,74 @@ const Header = () => {
           </button>
         )}
       </header>
-      {isOpenBurgerMenu && (
-        <div className={css.burgerMenuWrapper}>
-          <nav className={css.burgerMenuNav}>
-            <ul className={css.burgerMenuNavList}>
+
+      <div
+        className={`${css.burgerMenuWrapper} ${
+          isOpenBurgerMenu ? css.open : ""
+        }`}
+      >
+        <nav className={css.burgerMenuNav}>
+          <ul className={css.burgerMenuNavList}>
+            <li className={css.burgerMenuNavItem}>
+              <Link onClick={handleCloseClick} to="/">
+                Home
+              </Link>
+            </li>
+            <li className={css.burgerMenuNavItem}>
+              <Link onClick={handleCloseClick} to="/teachers">
+                Teachers
+              </Link>
+            </li>
+            {isAuthorized && (
               <li className={css.burgerMenuNavItem}>
-                <Link to="/">Home</Link>
+                <Link onClick={handleCloseClick} to="/favorites">
+                  Favorites
+                </Link>
               </li>
-              <li className={css.burgerMenuNavItem}>
-                <Link to="/teachers">Teachers</Link>
-              </li>
-              {isAuthorized && (
-                <li className={css.burgerMenuNavItem}>
-                  <Link to="/favorites">Favorites</Link>
-                </li>
-              )}
-            </ul>
-          </nav>
-          <div className={css.burgerMenuAction}>
-            {isAuthorized ? (
-              <button className={css.burgerMenuActionBtnLogin} type="button">
-                <svg
-                  className={css.burgerMenuActionBtnLoginIcon}
-                  width="20"
-                  height="20"
-                >
-                  <use href="/sprite.svg#icon-logout" />
-                </svg>
-                Log out
-              </button>
-            ) : (
-              <button className={css.burgerMenuActionBtnLogin} type="button">
-                <svg
-                  className={css.burgerMenuActionBtnLoginIcon}
-                  width="20"
-                  height="20"
-                >
-                  <use href="/sprite.svg#icon-login" />
-                </svg>
-                Log in
-              </button>
             )}
-            <button className={css.burgerMenuActionBtnRegister} type="button">
-              Registration
+          </ul>
+        </nav>
+        <div className={css.burgerMenuAction}>
+          {isAuthorized ? (
+            <button
+              onClick={handleCloseClick}
+              className={css.burgerMenuActionBtnLogin}
+              type="button"
+            >
+              <svg
+                className={css.burgerMenuActionBtnLoginIcon}
+                width="20"
+                height="20"
+              >
+                <use href="/sprite.svg#icon-logout" />
+              </svg>
+              Log out
             </button>
-          </div>
+          ) : (
+            <button
+              onClick={handleCloseClick}
+              className={css.burgerMenuActionBtnLogin}
+              type="button"
+            >
+              <svg
+                className={css.burgerMenuActionBtnLoginIcon}
+                width="20"
+                height="20"
+              >
+                <use href="/sprite.svg#icon-login" />
+              </svg>
+              Log in
+            </button>
+          )}
+          <button
+            onClick={handleCloseClick}
+            className={css.burgerMenuActionBtnRegister}
+            type="button"
+          >
+            Registration
+          </button>
         </div>
-      )}
+      </div>
     </Container>
   );
 };

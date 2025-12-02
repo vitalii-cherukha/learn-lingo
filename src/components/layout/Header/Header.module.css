@@ -39,7 +39,7 @@
 /* Styles for Burger Menu */
 
 .burgerMenuWrapper {
-  position: absolute;
+  position: fixed;
   z-index: 10;
   left: 0;
   right: 0;
@@ -50,6 +50,17 @@
   flex-direction: column;
   gap: 32px;
   background-color: #fff;
+
+  pointer-events: none;
+  transform: translateY(-130%);
+  opacity: 0;
+  transition: transform 0.35s ease, opacity 0.35s ease;
+}
+
+.open {
+  transform: translateY(0);
+  opacity: 1;
+  pointer-events: auto;
 }
 
 .burgerMenuNav {
@@ -128,7 +139,7 @@
 .burgerMenuActionBtnRegister {
   color: #fff;
   border-radius: 12px;
-  width: 100%;
+  width: 361px;
   height: 48px;
   background: #121417;
   font-weight: 700;
