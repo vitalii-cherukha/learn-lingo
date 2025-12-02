@@ -9,17 +9,17 @@ const Header = () => {
   const [isOpenBurgerMenu, setIsOpenBurgerMenu] = useState(false);
 
   const handleCloseClick = () => {
-    if (!isOpenBurgerMenu) {
-      setIsOpenBurgerMenu(true);
-    } else {
-      setIsOpenBurgerMenu(false);
-    }
+    setIsOpenBurgerMenu(false);
+  };
+
+  const handleOpenClick = () => {
+    setIsOpenBurgerMenu(true);
   };
 
   return (
     <Container>
       <header className={css.header}>
-        <Link to={"/"} className={css.logoWrapper}>
+        <Link to={"/"} onClick={handleCloseClick} className={css.logoWrapper}>
           <svg className={css.logoIcon} width="28" height="28">
             <use href="/icon.svg" />
           </svg>
@@ -63,7 +63,7 @@ const Header = () => {
         {!isOpenBurgerMenu ? (
           <button
             type="button"
-            onClick={handleCloseClick}
+            onClick={handleOpenClick}
             className={css.burgerMenuBtn}
           >
             <svg className={css.burgerMenuIcon} width="35" height="35">
