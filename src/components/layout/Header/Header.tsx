@@ -126,28 +126,30 @@ const Header = () => {
               Log out
             </button>
           ) : (
-            <button
-              onClick={handleCloseClick}
-              className={css.burgerMenuActionBtnLogin}
-              type="button"
-            >
-              <svg
-                className={css.burgerMenuActionBtnLoginIcon}
-                width="20"
-                height="20"
+            <>
+              <button
+                onClick={handleCloseClick}
+                className={css.burgerMenuActionBtnLogin}
+                type="button"
               >
-                <use href="/sprite.svg#icon-login" />
-              </svg>
-              Log in
-            </button>
+                <svg
+                  className={css.burgerMenuActionBtnLoginIcon}
+                  width="20"
+                  height="20"
+                >
+                  <use href="/sprite.svg#icon-login" />
+                </svg>
+                Log in
+              </button>
+              <button
+                onClick={handleCloseClick}
+                className={css.burgerMenuActionBtnRegister}
+                type="button"
+              >
+                Registration
+              </button>
+            </>
           )}
-          <button
-            onClick={handleCloseClick}
-            className={css.burgerMenuActionBtnRegister}
-            type="button"
-          >
-            Registration
-          </button>
         </div>
       </div>
     </Container>
