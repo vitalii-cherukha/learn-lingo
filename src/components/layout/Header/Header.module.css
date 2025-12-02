@@ -1,4 +1,6 @@
 .header {
+  padding-left: 10px;
+  padding-right: 10px;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -29,11 +31,16 @@
   display: none;
 }
 
+.burgerMenuIcon {
+  stroke: #121417;
+  fill: none;
+}
+
 /* Styles for Tablet devices */
 @media only screen and (min-width: 768px) {
   .header {
-    padding-left: 32px;
-    padding-right: 32px;
+    padding-left: 28px;
+    padding-right: 28px;
   }
 
   .nav {
@@ -126,6 +133,10 @@
   .actionBtnRegister:active {
     background: #121417;
     transform: scale(0.96) translateY(0);
+  }
+
+  .burgerMenuBtn {
+    display: none;
   }
 }
 /* Styles for Desktop devices */

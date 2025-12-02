@@ -2,8 +2,20 @@ import { Link } from "react-router";
 import Container from "../Container/Container";
 import css from "./Header.module.css";
 import BurgerMenu from "../../common/BurgerMenu/BurgerMenu";
+import { useState } from "react";
 
 const Header = () => {
+  const [isAuthorized, setIsAuthorized] = useState(false);
+  const [isOpenBurgerMenu, setIsOpenBurgerMenu] = useState(false);
+
+  const handleClick = () => {
+    if (!isOpenBurgerMenu) {
+      setIsOpenBurgerMenu(true);
+    } else {
+      setIsOpenBurgerMenu(false);
+    }
+  };
+
   return (
     <Container>
       <header className={css.header}>
@@ -21,6 +33,11 @@ const Header = () => {
             <li className={css.navItem}>
               <Link to="/teachers">Teachers</Link>
             </li>
+            {isAuthorized && (
+              <li className={css.navItem}>
+                <Link to="/favorites">Favorites</Link>
+              </li>
+            )}
           </ul>
         </nav>
         <div className={css.action}>
@@ -34,8 +51,29 @@ const Header = () => {
             Registration
           </button>
         </div>
-        <BurgerMenu />
+        {!isOpenBurgerMenu ? (
+          <button
+            type="button"
+            onClick={handleClick}
+            className={css.burgerMenuBtn}
+          >
+            <svg className={css.burgerMenuIcon} width="35" height="35">
+              <use href="/sprite.svg#icon-burger" />
+            </svg>
+          </button>
+        ) : (
+          <button
+            type="button"
+            onClick={handleClick}
+            className={css.burgerMenuBtn}
+          >
+            <svg className={css.burgerMenuIcon} width="35" height="35">
+              <use href="/sprite.svg#icon-cancel" />
+            </svg>
+          </button>
+        )}
       </header>
+      {isOpenBurgerMenu && <BurgerMenu />}
     </Container>
   );
 };
