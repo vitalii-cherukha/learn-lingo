@@ -1,6 +1,10 @@
+import { useState } from "react";
+import Registration from "../Registration/Registration";
 import css from "./Hero.module.css";
 
 const Hero = () => {
+  const [isOpenRegistration, setIsOpenRegistration] = useState(false);
+
   return (
     <div className={css.heroWrapper}>
       <div className={css.titleWrapper}>
@@ -13,11 +17,20 @@ const Hero = () => {
           Elevate your language proficiency to new heights by connecting with
           highly qualified and experienced tutors.
         </p>
-        <button className={css.titleBtn}>Get started</button>
+        <button
+          onClick={() => setIsOpenRegistration(true)}
+          className={css.titleBtn}
+        >
+          Get started
+        </button>
       </div>
       <div className={css.imgWrapper}>
         <img className={css.img} src="/user/user-yellow@2x.webp" alt="User" />
       </div>
+      <Registration
+        isOpen={isOpenRegistration}
+        onClose={() => setIsOpenRegistration(false)}
+      />
     </div>
   );
 };
