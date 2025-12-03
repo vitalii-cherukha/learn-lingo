@@ -2,6 +2,7 @@ import { useForm } from "react-hook-form";
 import * as Yup from "yup";
 import css from "./FormRegistration.module.css";
 import { yupResolver } from "@hookform/resolvers/yup";
+import { useState } from "react";
 
 type Inputs = {
   name: string;
@@ -24,6 +25,9 @@ const registrationSchema = Yup.object().shape({
 });
 
 const FormRegistration = () => {
+  const [showPassword, setShowPassword] = useState(false);
+  const togglePassword = () => setShowPassword((prev) => !prev);
+
   const {
     register,
     handleSubmit,
@@ -65,13 +69,24 @@ const FormRegistration = () => {
         <input
           className={`${css.input} ${errors.password ? css.errorInput : ""}`}
           placeholder="Password"
-          type="password"
+          type={showPassword ? "text" : "password"}
           {...register("password")}
           onFocus={() => clearErrors("password")}
         />
         {errors.password && (
           <p className={css.error}>{errors.password.message}</p>
         )}
+
+        <svg
+          className={css.icon}
+          onClick={togglePassword}
+          width="20"
+          height="20"
+        >
+          <use
+            href={`/sprite.svg#${showPassword ? "icon-eye" : "icon-eye-off"}`}
+          />
+        </svg>
       </div>
 
       <button className={css.btn} type="submit">
