@@ -1,19 +1,14 @@
 import { useState, useRef, useEffect } from "react";
-import css from "./CustomSelect.module.css";
+import css from "./LevelSelect.module.css";
 
-interface CustomSelectProps {
+interface LevelSelectProps {
   label: string;
   options: string[];
   value: string;
   onChange: (val: string) => void;
 }
 
-const CustomSelect = ({
-  label,
-  options,
-  value,
-  onChange,
-}: CustomSelectProps) => {
+const LevelSelect = ({ label, options, value, onChange }: LevelSelectProps) => {
   const [open, setOpen] = useState(false);
   const wrapperRef = useRef<HTMLDivElement | null>(null);
 
@@ -44,7 +39,7 @@ const CustomSelect = ({
         className={`${css.select} ${open ? css.open : ""}`}
         onClick={() => setOpen((prev) => !prev)}
       >
-        <span>{value}</span>
+        <span className={css.value}>{value}</span>
 
         <svg className={css.icon} width="20" height="20">
           <use href="/sprite.svg#icon-chevron-down" />
@@ -68,4 +63,4 @@ const CustomSelect = ({
   );
 };
 
-export default CustomSelect;
+export default LevelSelect;

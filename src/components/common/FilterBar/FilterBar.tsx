@@ -1,4 +1,6 @@
-import CustomSelect from "../CustomSelect/CustomSelect";
+import LangSelect from "../LangSelect/LangSelect";
+import LevelSelect from "../LevelSelect/LevelSelect";
+import PriceSelect from "../PriceSelect/PriceSelect";
 import css from "./FilterBar.module.css";
 import { useState } from "react";
 
@@ -9,14 +11,14 @@ const FilterBar = () => {
 
   return (
     <div className={css.wrapper}>
-      <CustomSelect
+      <LangSelect
         label="Languages"
         options={["French", "English", "German", "Ukrainian", "Polish"]}
         value={language}
         onChange={setLanguage}
       />
 
-      <CustomSelect
+      <LevelSelect
         label="Level of knowledge"
         options={[
           "A1 Beginner",
@@ -28,7 +30,7 @@ const FilterBar = () => {
         onChange={setLevel}
       />
 
-      <CustomSelect
+      <PriceSelect
         label="Price"
         options={["10", "20", "30", "40"]}
         value={price}
