@@ -1,6 +1,5 @@
 import { User } from "firebase/auth";
 
-// Auth Types
 export interface AuthContextType {
   currentUser: User | null;
   signup: (
@@ -13,7 +12,6 @@ export interface AuthContextType {
   getUser: () => User | null;
 }
 
-// Teacher Types
 export interface Review {
   userId: string;
   rating: number;
