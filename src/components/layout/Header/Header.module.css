@@ -56,9 +56,6 @@
   pointer-events: auto;
 }
 
-.burgerMenuNav {
-}
-
 .burgerMenuNavList {
   display: flex;
   align-items: center;

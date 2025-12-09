@@ -1,6 +1,9 @@
 import Modal from "../Modal/Modal";
 import css from "./Registration.module.css";
 import FormRegistration from "../FormRegistration/FormRegistration";
+import { User } from "../../../types";
+import { useState } from "react";
+import { useAuthStore } from "../../../store/authStore";
 
 interface RegistrationProps {
   isOpen: boolean;
@@ -8,7 +11,22 @@ interface RegistrationProps {
 }
 
 const Registration = ({ isOpen, onClose }: RegistrationProps) => {
+  const { register: registerUser } = useAuthStore();
+  const [loading, setLoading] = useState(false);
+
   if (!isOpen) return null;
+
+  const onSubmit = async (data: User) => {
+    setLoading(true);
+    try {
+      await registerUser(data.email, data.password, data.name);
+      onClose();
+    } catch (error) {
+      console.log(error);
+    } finally {
+      setLoading(false);
+    }
+  };
 
   return (
     <Modal onClose={onClose}>
@@ -19,7 +37,7 @@ const Registration = ({ isOpen, onClose }: RegistrationProps) => {
           need some information. Please provide us with the following
           information
         </p>
-        <FormRegistration />
+        <FormRegistration loading={loading} onSubmit={onSubmit} />
         <button onClick={onClose}>
           <svg className={css.closeIcon} width="32" height="32">
             <use href="/sprite.svg#icon-close-modal" />

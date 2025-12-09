@@ -1,15 +1,7 @@
-import { User } from "firebase/auth";
-
-export interface AuthContextType {
-  currentUser: User | null;
-  signup: (
-    email: string,
-    password: string,
-    displayName?: string
-  ) => Promise<User>;
-  login: (email: string, password: string) => Promise<User>;
-  logout: () => Promise<void>;
-  getUser: () => User | null;
+export interface User {
+  name: string;
+  email: string;
+  password: string;
 }
 
 export interface Review {

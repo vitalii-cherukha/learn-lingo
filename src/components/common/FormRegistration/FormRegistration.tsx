@@ -3,12 +3,13 @@ import * as Yup from "yup";
 import css from "./FormRegistration.module.css";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useState } from "react";
+import { User } from "../../../types";
+import { BounceLoader } from "react-spinners";
 
-type Inputs = {
-  name: string;
-  email: string;
-  password: string;
-};
+interface FormRegistrationProps {
+  onSubmit: (data: User) => Promise<void>;
+  loading: boolean;
+}
 
 const registrationSchema = Yup.object().shape({
   name: Yup.string()
@@ -24,7 +25,7 @@ const registrationSchema = Yup.object().shape({
     .required("Password is required"),
 });
 
-const FormRegistration = () => {
+const FormRegistration = ({ onSubmit, loading }: FormRegistrationProps) => {
   const [showPassword, setShowPassword] = useState(false);
   const togglePassword = () => setShowPassword((prev) => !prev);
 
@@ -33,15 +34,11 @@ const FormRegistration = () => {
     handleSubmit,
     clearErrors,
     formState: { errors },
-  } = useForm<Inputs>({
+  } = useForm<User>({
     resolver: yupResolver(registrationSchema),
     mode: "onBlur",
     reValidateMode: "onBlur",
   });
-
-  const onSubmit = (data: Inputs) => {
-    console.log("Form submitted:", data);
-  };
 
   return (
     <form className={css.form} onSubmit={handleSubmit(onSubmit)}>
@@ -90,7 +87,7 @@ const FormRegistration = () => {
       </div>
 
       <button className={css.btn} type="submit">
-        Sign Up
+        {!loading ? "Sign Up" : <BounceLoader color="#121417" />}
       </button>
     </form>
   );
