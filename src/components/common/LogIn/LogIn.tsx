@@ -1,6 +1,9 @@
+import { useState } from "react";
+import { useAuthStore } from "../../../store/authStore";
 import FormLogIn from "../FormLogIn/FormLogIn";
 import Modal from "../Modal/Modal";
 import css from "./LogIn.module.css";
+import { UserLogIn } from "../../../types";
 
 interface LogInProps {
   isOpen: boolean;
@@ -8,7 +11,22 @@ interface LogInProps {
 }
 
 const LogIn = ({ isOpen, onClose }: LogInProps) => {
+  const { login } = useAuthStore();
+  const [loading, setLoading] = useState(false);
+
   if (!isOpen) return null;
+
+  const onSubmit = async (data: UserLogIn) => {
+    setLoading(true);
+    try {
+      await login(data.email, data.password);
+      onClose();
+    } catch (error) {
+      console.log(error);
+    } finally {
+      setLoading(false);
+    }
+  };
 
   return (
     <Modal onClose={onClose}>
@@ -19,7 +37,7 @@ const LogIn = ({ isOpen, onClose }: LogInProps) => {
           need some information. Please provide us with the following
           information
         </p>
-        <FormLogIn />
+        <FormLogIn loading={loading} onSubmit={onSubmit} />
         <button onClick={onClose}>
           <svg className={css.closeIcon} width="32" height="32">
             <use href="/sprite.svg#icon-close-modal" />

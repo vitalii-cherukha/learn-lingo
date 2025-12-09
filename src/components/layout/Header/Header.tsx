@@ -33,7 +33,6 @@ const Header = ({ colorBg }: HeaderProps) => {
   const handleOpenClick = () => {
     setIsOpenBurgerMenu(true);
   };
-
   return (
     <Container>
       <header className={css.header}>
@@ -118,18 +117,21 @@ const Header = ({ colorBg }: HeaderProps) => {
         <nav className={css.burgerMenuNav}>
           <ul className={css.burgerMenuNavList}>
             <li className={css.burgerMenuNavItem}>
-              <Link onClick={handleCloseClick} to="/">
+              <Link onClick={() => setIsOpenBurgerMenu(false)} to="/">
                 Home
               </Link>
             </li>
             <li className={css.burgerMenuNavItem}>
-              <Link onClick={handleCloseClick} to="/teachers">
+              <Link onClick={() => setIsOpenBurgerMenu(false)} to="/teachers">
                 Teachers
               </Link>
             </li>
             {isAuthorized && (
               <li className={css.burgerMenuNavItem}>
-                <Link onClick={handleCloseClick} to="/favorites">
+                <Link
+                  onClick={() => setIsOpenBurgerMenu(false)}
+                  to="/favorites"
+                >
                   Favorites
                 </Link>
               </li>
@@ -141,7 +143,7 @@ const Header = ({ colorBg }: HeaderProps) => {
             <button
               onClick={() => {
                 logout();
-                handleCloseClick();
+                setIsOpenBurgerMenu(false);
               }}
               className={css.burgerMenuActionBtnLogin}
               type="button"
@@ -160,7 +162,7 @@ const Header = ({ colorBg }: HeaderProps) => {
               <button
                 onClick={() => {
                   setIsOpenLogIn(true);
-                  handleCloseClick();
+                  setIsOpenBurgerMenu(false);
                 }}
                 className={css.burgerMenuActionBtnLogin}
                 type="button"
@@ -177,7 +179,7 @@ const Header = ({ colorBg }: HeaderProps) => {
               <button
                 onClick={() => {
                   setIsOpenRegistration(true);
-                  handleCloseClick();
+                  setIsOpenBurgerMenu(false);
                 }}
                 className={css.burgerMenuActionBtnRegister}
                 type="button"

@@ -72,3 +72,10 @@
   background-color: var(--color-profile);
   transform: scale(0.96) translateY(0);
 }
+
+.loader {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0 auto;
+}

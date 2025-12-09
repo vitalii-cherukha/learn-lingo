@@ -3,11 +3,13 @@ import * as Yup from "yup";
 import css from "./FormLogIn.module.css";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useState } from "react";
+import { UserLogIn } from "../../../types";
+import { BarLoader } from "react-spinners";
 
-type Inputs = {
-  email: string;
-  password: string;
-};
+interface FormLogInProps {
+  onSubmit: (data: UserLogIn) => Promise<void>;
+  loading: boolean;
+}
 
 const registrationSchema = Yup.object().shape({
   email: Yup.string()
@@ -19,7 +21,7 @@ const registrationSchema = Yup.object().shape({
     .required("Password is required"),
 });
 
-const FormLogIn = () => {
+const FormLogIn = ({ onSubmit, loading }: FormLogInProps) => {
   const [showPassword, setShowPassword] = useState(false);
   const togglePassword = () => setShowPassword((prev) => !prev);
 
@@ -28,15 +30,11 @@ const FormLogIn = () => {
     handleSubmit,
     clearErrors,
     formState: { errors },
-  } = useForm<Inputs>({
+  } = useForm<UserLogIn>({
     resolver: yupResolver(registrationSchema),
     mode: "onBlur",
     reValidateMode: "onBlur",
   });
-
-  const onSubmit = (data: Inputs) => {
-    console.log("Form submitted:", data);
-  };
 
   return (
     <form className={css.form} onSubmit={handleSubmit(onSubmit)}>
@@ -75,7 +73,16 @@ const FormLogIn = () => {
       </div>
 
       <button className={css.btn} type="submit">
-        Log In
+        {!loading ? (
+          "Log In"
+        ) : (
+          <BarLoader
+            className={css.loader}
+            color="#121417"
+            speedMultiplier={3}
+            width={100}
+          />
+        )}
       </button>
     </form>
   );
