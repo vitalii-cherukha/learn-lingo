@@ -49,28 +49,32 @@ export const useAuthStore = create<AuthState>()(
 
         logout: async () => {
           await signOut(auth);
-          set({ user: null });
         },
 
         initAuth: () => {
           onAuthStateChanged(auth, (firebaseUser) => {
-            if (firebaseUser) {
-              set({
-                user: {
-                  uid: firebaseUser.uid,
-                  email: firebaseUser.email,
-                },
-              });
-            } else {
-              set({ user: null });
-            }
+            set((state) => {
+              if (
+                (firebaseUser && state.user?.uid === firebaseUser.uid) ||
+                (!firebaseUser && state.user === null)
+              ) {
+                return state;
+              }
+
+              return {
+                user: firebaseUser
+                  ? {
+                      uid: firebaseUser.uid,
+                      email: firebaseUser.email,
+                    }
+                  : null,
+              };
+            });
           });
         },
       }),
-
       {
         name: "auth-store",
-
         partialize: (state) => ({
           user: state.user,
         }),

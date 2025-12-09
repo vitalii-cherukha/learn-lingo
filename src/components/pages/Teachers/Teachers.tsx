@@ -13,7 +13,6 @@ const Teachers = () => {
         <PageTransition>
           <FilterBar />
         </PageTransition>
-
         <List />
       </Container>
     </section>

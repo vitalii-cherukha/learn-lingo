@@ -59,7 +59,13 @@ const Header = ({ colorBg }: HeaderProps) => {
         </nav>
         <div className={css.action}>
           {isAuthorized ? (
-            <button className={css.actionBtnLogin} type="button">
+            <button
+              className={css.actionBtnLogin}
+              type="button"
+              onClick={() => {
+                logout();
+              }}
+            >
               <svg className={css.actionBtnLoginIcon} width="20" height="20">
                 <use href="/sprite.svg#icon-logout" />
               </svg>
@@ -77,13 +83,15 @@ const Header = ({ colorBg }: HeaderProps) => {
               Log in
             </button>
           )}
-          <button
-            onClick={() => setIsOpenRegistration(true)}
-            className={css.actionBtnRegister}
-            type="button"
-          >
-            Registration
-          </button>
+          {!isAuthorized && (
+            <button
+              onClick={() => setIsOpenRegistration(true)}
+              className={css.actionBtnRegister}
+              type="button"
+            >
+              Registration
+            </button>
+          )}
         </div>
         {!isOpenBurgerMenu ? (
           <button
