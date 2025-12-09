@@ -2,19 +2,29 @@ import { Link } from "react-router";
 import Container from "../Container/Container";
 import css from "./Header.module.css";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Registration from "../../common/Registration/Registration";
 import LogIn from "../../common/LogIn/LogIn";
+import { useAuthStore } from "../../../store/authStore";
 
 interface HeaderProps {
   colorBg?: string;
 }
 
 const Header = ({ colorBg }: HeaderProps) => {
-  const [isAuthorized, setIsAuthorized] = useState(false);
+  const user = useAuthStore((state) => state.user);
+  const initAuth = useAuthStore((state) => state.initAuth);
+  const logout = useAuthStore((state) => state.logout);
+
   const [isOpenBurgerMenu, setIsOpenBurgerMenu] = useState(false);
   const [isOpenRegistration, setIsOpenRegistration] = useState(false);
   const [isOpenLogIn, setIsOpenLogIn] = useState(false);
+
+  useEffect(() => {
+    initAuth();
+  }, [initAuth]);
+
+  const isAuthorized = Boolean(user);
 
   const handleCloseClick = () => {
     setIsOpenBurgerMenu(false);
@@ -129,7 +139,10 @@ const Header = ({ colorBg }: HeaderProps) => {
         <div className={css.burgerMenuAction}>
           {isAuthorized ? (
             <button
-              onClick={handleCloseClick}
+              onClick={() => {
+                logout();
+                handleCloseClick();
+              }}
               className={css.burgerMenuActionBtnLogin}
               type="button"
             >

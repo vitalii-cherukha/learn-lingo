@@ -11,7 +11,7 @@ interface RegistrationProps {
 }
 
 const Registration = ({ isOpen, onClose }: RegistrationProps) => {
-  const { register: registerUser } = useAuthStore();
+  const { register } = useAuthStore();
   const [loading, setLoading] = useState(false);
 
   if (!isOpen) return null;
@@ -19,7 +19,7 @@ const Registration = ({ isOpen, onClose }: RegistrationProps) => {
   const onSubmit = async (data: User) => {
     setLoading(true);
     try {
-      await registerUser(data.email, data.password, data.name);
+      await register(data.email, data.password, data.name);
       onClose();
     } catch (error) {
       console.log(error);

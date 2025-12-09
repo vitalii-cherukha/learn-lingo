@@ -4,7 +4,7 @@ import css from "./FormRegistration.module.css";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useState } from "react";
 import { User } from "../../../types";
-import { BounceLoader } from "react-spinners";
+import { BarLoader } from "react-spinners";
 
 interface FormRegistrationProps {
   onSubmit: (data: User) => Promise<void>;
@@ -87,7 +87,16 @@ const FormRegistration = ({ onSubmit, loading }: FormRegistrationProps) => {
       </div>
 
       <button className={css.btn} type="submit">
-        {!loading ? "Sign Up" : <BounceLoader color="#121417" />}
+        {!loading ? (
+          "Sign Up"
+        ) : (
+          <BarLoader
+            className={css.loader}
+            color="#121417"
+            speedMultiplier={3}
+            width={100}
+          />
+        )}
       </button>
     </form>
   );
