@@ -6,7 +6,11 @@ import { useState } from "react";
 import Registration from "../../common/Registration/Registration";
 import LogIn from "../../common/LogIn/LogIn";
 
-const Header = () => {
+interface HeaderProps {
+  colorBg?: string;
+}
+
+const Header = ({ colorBg }: HeaderProps) => {
   const [isAuthorized, setIsAuthorized] = useState(false);
   const [isOpenBurgerMenu, setIsOpenBurgerMenu] = useState(false);
   const [isOpenRegistration, setIsOpenRegistration] = useState(false);
@@ -99,6 +103,7 @@ const Header = () => {
         className={`${css.burgerMenuWrapper} ${
           isOpenBurgerMenu ? css.open : ""
         }`}
+        style={{ backgroundColor: colorBg }}
       >
         <nav className={css.burgerMenuNav}>
           <ul className={css.burgerMenuNavList}>

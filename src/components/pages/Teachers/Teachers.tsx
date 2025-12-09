@@ -7,7 +7,7 @@ import css from "./Teachers.module.css";
 const Teachers = () => {
   return (
     <section className={css.bg}>
-      <Header />
+      <Header colorBg="#f8f8f8" />
       <Container>
         <FilterBar />
         <List />
