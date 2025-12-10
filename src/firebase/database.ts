@@ -10,7 +10,7 @@ import { Teacher } from "../types";
 
 // Отримати всіх викладачів
 export const getAllTeachers = async (): Promise<Teacher[]> => {
-  const teachersRef = ref(database, "teachers");
+  const teachersRef = ref(database, "/");
   const snapshot: DataSnapshot = await get(teachersRef);
 
   if (snapshot.exists()) {
@@ -29,7 +29,7 @@ export const getAllTeachers = async (): Promise<Teacher[]> => {
 
 // Отримати викладача по ID
 export const getTeacherById = async (teacherId: string): Promise<Teacher> => {
-  const teacherRef = ref(database, `teachers/${teacherId}`);
+  const teacherRef = ref(database, `/${teacherId}`);
   const snapshot: DataSnapshot = await get(teacherRef);
 
   if (snapshot.exists()) {
@@ -46,7 +46,7 @@ export const getTeacherById = async (teacherId: string): Promise<Teacher> => {
 export const subscribeToTeachers = (
   callback: (teachers: Teacher[]) => void
 ): Unsubscribe => {
-  const teachersRef = ref(database, "teachers");
+  const teachersRef = ref(database, "/");
 
   return onValue(teachersRef, (snapshot: DataSnapshot) => {
     const teachers: Teacher[] = [];
