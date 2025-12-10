@@ -19,15 +19,19 @@ const List = () => {
       <ul className={css.list}>
         {teachers.map((teacher) => (
           <li key={teacher.id} className={css.listItem}>
-            <img
-              src={teacher.avatar_url}
-              alt={teacher.name}
-              className={css.avatar}
-            />
+            <div className={css.imgWrapper}>
+              <img
+                width="96"
+                height="96"
+                src={teacher.avatar_url}
+                alt={teacher.name}
+                className={css.avatar}
+              />
+            </div>
             <div className={css.teacherInfo}>
               <h3>{`${teacher.name} ${teacher.surname}`}</h3>
-              <p>{teacher.lesson_info}</p>
-              <p>{teacher.experience}</p>
+              {/* <p>{teacher.lesson_info}</p> */}
+              {/* <p>{teacher.experience}</p> */}
               <p>{teacher.price_per_hour} €/h</p>
             </div>
           </li>
