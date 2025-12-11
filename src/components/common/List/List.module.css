@@ -1,6 +1,4 @@
 .listContainer {
-  padding-left: 64px;
-  padding-right: 64px;
 }
 
 .list {
@@ -32,4 +30,19 @@
   border-radius: 50%;
   object-fit: cover;
   object-position: center;
+}
+
+/* Styles for Tablet devices */
+@media only screen and (min-width: 768px) {
+  .listContainer {
+    padding-left: 32px;
+    padding-right: 32px;
+  }
+}
+/* Styles for Desktop devices */
+@media only screen and (min-width: 1440px) {
+  .listContainer {
+    padding-left: 64px;
+    padding-right: 64px;
+  }
 }
