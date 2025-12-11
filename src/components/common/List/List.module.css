@@ -9,8 +9,8 @@
 
 .listItem {
   display: flex;
-  gap: 48px;
-  padding: 24px;
+  gap: 8px;
+  padding: 12px;
   background-color: #fff;
   border-radius: 24px;
 }
@@ -32,11 +32,97 @@
   object-position: center;
 }
 
+.teacherInfo {
+  display: flex;
+  gap: 8px;
+}
+
+.titleWrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.titleText {
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 150%;
+  color: #8a8a89;
+}
+
+.title {
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 100%;
+  color: #121417;
+}
+
+.infoList {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.infoListItem {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 150%;
+  color: var(--color-primary);
+}
+
+.infoIcon {
+  fill: none;
+  stroke: var(--color-primary);
+}
+
+.infoIconStar {
+  fill: #ffc531;
+}
+
+.price {
+  color: #38cd3e;
+}
+
 /* Styles for Tablet devices */
 @media only screen and (min-width: 768px) {
   .listContainer {
     padding-left: 32px;
     padding-right: 32px;
+  }
+
+  .teacherInfo {
+    gap: 20px;
+  }
+
+  .listItem {
+    gap: 18px;
+    padding: 16px;
+  }
+
+  .titleWrapper {
+    gap: 2px;
+  }
+
+  .titleText {
+    font-size: 14px;
+  }
+
+  .title {
+    font-size: 18px;
+  }
+
+  .infoList {
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 16px;
+  }
+
+  .infoListItem {
+    gap: 4px;
+    font-size: 14px;
   }
 }
 /* Styles for Desktop devices */
@@ -44,5 +130,35 @@
   .listContainer {
     padding-left: 64px;
     padding-right: 64px;
+  }
+
+  .teacherInfo {
+    gap: 110px;
+  }
+
+  .listItem {
+    gap: 48px;
+    padding: 24px;
+  }
+
+  .titleWrapper {
+    gap: 8px;
+  }
+
+  .titleText {
+    font-size: 16px;
+  }
+
+  .title {
+    font-size: 24px;
+  }
+
+  .infoList {
+    gap: 32px;
+  }
+
+  .infoListItem {
+    gap: 8px;
+    font-size: 16px;
   }
 }
