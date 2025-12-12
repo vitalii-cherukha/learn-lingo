@@ -54,7 +54,7 @@
 
 .title {
   font-weight: 500;
-  font-size: 16px;
+  font-size: 14px;
   line-height: 100%;
   color: #121417;
 }
@@ -126,12 +126,26 @@
   .infoList {
     flex-direction: row;
     flex-wrap: wrap;
-    gap: 20px;
+    gap: 16px;
   }
 
   .infoListItem {
+    position: relative;
     gap: 4px;
     font-size: 14px;
+    padding-right: 16px;
+  }
+
+  .infoListItem:nth-child(1)::after,
+  .infoListItem:nth-child(3)::after {
+    content: "";
+    position: absolute;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 1px;
+    height: 16px;
+    background-color: #8a8a89;
   }
 }
 /* Styles for Desktop devices */
@@ -163,11 +177,23 @@
   }
 
   .infoList {
-    gap: 32px;
+    gap: 16px;
   }
 
   .infoListItem {
     gap: 8px;
     font-size: 16px;
+    padding-right: 16px;
+  }
+
+  .infoListItem:not(:last-child)::after {
+    content: "";
+    position: absolute;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 1px;
+    height: 16px;
+    background-color: #8a8a89;
   }
 }
