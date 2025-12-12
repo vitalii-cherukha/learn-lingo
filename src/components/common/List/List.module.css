@@ -149,6 +149,37 @@
   background-color: var(--color-profile);
 }
 
+.readMoreWrapper {
+  margin-top: 12px;
+}
+
+.readMoreText {
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 150%;
+}
+
+.readMoreList {
+  margin-top: 16px;
+}
+
+.readMoreItem {
+}
+
+.readMoreItemTitleWrapper {
+  display: flex;
+  gap: 12px;
+}
+
+.ratingWrapper {
+  display: flex;
+  flex-direction: column;
+}
+
+.readMoreItemRating {
+  display: flex;
+}
+
 /* Styles for Tablet devices */
 @media only screen and (min-width: 768px) {
   .listContainer {
@@ -230,6 +261,18 @@
 
   .levelItem {
     font-size: 14px;
+  }
+
+  .readMoreWrapper {
+    margin-top: 16px;
+  }
+
+  .readMoreText {
+    font-size: 16px;
+  }
+
+  .readMoreList {
+    margin-top: 32px;
   }
 }
 /* Styles for Desktop devices */

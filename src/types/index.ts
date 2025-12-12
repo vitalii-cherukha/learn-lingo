@@ -10,10 +10,9 @@ export interface UserLogIn {
 }
 
 export interface Review {
-  userId: string;
-  rating: number;
+  reviewer_name: string;
+  reviewer_rating: number;
   comment: string;
-  date: string;
 }
 
 export interface Teacher {

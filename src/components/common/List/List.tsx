@@ -107,6 +107,41 @@ const List = ({ teachers, loading }: ListProps) => {
 
                 <button className={css.btnOpen}>Read more</button>
 
+                <div className={css.readMoreWrapper}>
+                  <p className={css.readMoreText}>{teacher.experience}</p>
+                  <ul className={css.readMoreList}>
+                    {teacher.reviews.map((review, index) => (
+                      <li key={index} className={css.readMoreItem}>
+                        <div className={css.readMoreItemTitleWrapper}>
+                          <div className={css.readMoreItemImgWrapper}>
+                            <img
+                              width="24"
+                              height="24"
+                              src="/default-photo.jpg"
+                              alt={review.reviewer_name}
+                            />
+                          </div>
+                          <div className={css.ratingWrapper}>
+                            <p className={css.readMoreItemTitle}>
+                              {review.reviewer_name}
+                            </p>
+                            <div className={css.readMoreItemRating}>
+                              <svg
+                                className={css.readMoreItemIcon}
+                                width="16"
+                                height="16"
+                              >
+                                <use href="/sprite.svg#icon-star" />
+                              </svg>
+                              <p>{review.reviewer_rating}.0</p>
+                            </div>
+                          </div>
+                        </div>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+
                 <ul className={css.levelList}>
                   {teacher.levels.map((level, index) => (
                     <li key={index} className={css.levelItem}>
