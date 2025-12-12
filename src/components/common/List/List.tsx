@@ -8,6 +8,7 @@ import PageTransition from "../PageTransition/PageTransition";
 const List = () => {
   const [teachers, setTeachers] = useState<Teacher[]>([]);
   const [loading, setLoading] = useState(true);
+  const [expandedIds, setExpandedIds] = useState<Set<string>>(new Set());
 
   useEffect(() => {
     const fetchTeachers = async () => {
@@ -24,6 +25,18 @@ const List = () => {
 
     fetchTeachers();
   }, []);
+
+  const toggleExpanded = (id: string) => {
+    setExpandedIds((prev) => {
+      const newSet = new Set(prev);
+      if (newSet.has(id)) {
+        newSet.delete(id);
+      } else {
+        newSet.add(id);
+      }
+      return newSet;
+    });
+  };
 
   if (loading) {
     return <Loader />;
@@ -104,6 +117,16 @@ const List = () => {
                     </li>
                   </ul>
                 </div>
+
+                <button className={css.btnOpen}>Read more</button>
+
+                <ul className={css.levelList}>
+                  {teacher.levels.map((level, index) => (
+                    <li key={index} className={css.levelItem}>
+                      {level}
+                    </li>
+                  ))}
+                </ul>
               </div>
             </li>
           ))}

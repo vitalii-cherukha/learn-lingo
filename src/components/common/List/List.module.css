@@ -96,6 +96,7 @@
 }
 
 .lessonDetailsList {
+  margin-top: 12px;
   display: flex;
   flex-direction: column;
   gap: 8px;
@@ -103,7 +104,7 @@
 
 .lessonDetailsItem {
   font-weight: 500;
-  font-size: 16px;
+  font-size: 12px;
   line-height: 150%;
   color: #8a8a89;
 }
@@ -115,6 +116,37 @@
 .lessonDetailsList .lessonDetailsItem:first-child .lessonDetailsSpan {
   text-decoration: underline;
   text-decoration-skip-ink: none;
+}
+
+.btnOpen {
+  margin-top: 12px;
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 150%;
+  text-decoration: underline;
+  text-decoration-skip-ink: none;
+  color: var(--color-primary);
+}
+
+.levelList {
+  margin-top: 12px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.levelItem {
+  border: 1px solid #8a8a89;
+  border-radius: 35px;
+  padding: 8px 12px;
+  height: 32px;
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 114%;
+}
+
+.levelItem:first-child {
+  background-color: var(--color-profile);
 }
 
 /* Styles for Tablet devices */
@@ -178,6 +210,27 @@
     height: 16px;
     background-color: #8a8a89;
   }
+
+  .lessonDetailsList {
+    margin-top: 32px;
+  }
+
+  .lessonDetailsItem {
+    font-size: 16px;
+  }
+
+  .btnOpen {
+    margin-top: 16px;
+    font-size: 16px;
+  }
+
+  .levelList {
+    margin-top: 16px;
+  }
+
+  .levelItem {
+    font-size: 14px;
+  }
 }
 /* Styles for Desktop devices */
 @media only screen and (min-width: 1440px) {
@@ -229,5 +282,12 @@
     width: 1px;
     height: 16px;
     background-color: #8a8a89;
+  }
+
+  .levelList {
+    margin-top: 32px;
+  }
+
+  .levelItem {
   }
 }
