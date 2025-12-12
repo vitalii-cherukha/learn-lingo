@@ -1,30 +1,17 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { Teacher } from "../../../types";
-import { getAllTeachers } from "../../../firebase/database";
+
 import css from "./List.module.css";
 import Loader from "../Loader/Loader";
 import PageTransition from "../PageTransition/PageTransition";
 
-const List = () => {
-  const [teachers, setTeachers] = useState<Teacher[]>([]);
-  const [loading, setLoading] = useState(true);
+interface ListProps {
+  teachers: Teacher[];
+  loading: boolean;
+}
+
+const List = ({ teachers, loading }: ListProps) => {
   const [expandedIds, setExpandedIds] = useState<Set<string>>(new Set());
-
-  useEffect(() => {
-    const fetchTeachers = async () => {
-      try {
-        setLoading(true);
-        const data = await getAllTeachers();
-        setTeachers(data);
-      } catch (error) {
-        console.error("Error fetching teachers:", error);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchTeachers();
-  }, []);
 
   const toggleExpanded = (id: string) => {
     setExpandedIds((prev) => {
