@@ -112,31 +112,38 @@ const List = ({ teachers, loading }: ListProps) => {
                   <ul className={css.readMoreList}>
                     {teacher.reviews.map((review, index) => (
                       <li key={index} className={css.readMoreItem}>
-                        <div className={css.readMoreItemTitleWrapper}>
-                          <div className={css.readMoreItemImgWrapper}>
-                            <img
-                              width="44"
-                              height="44"
-                              src="/default-photo.jpg"
-                              alt={review.reviewer_name}
-                            />
-                          </div>
-                          <div className={css.ratingWrapper}>
-                            <p className={css.readMoreItemTitle}>
-                              {review.reviewer_name}
-                            </p>
-                            <div className={css.readMoreItemRating}>
-                              <svg
-                                className={css.readMoreItemIcon}
-                                width="16"
-                                height="16"
-                              >
-                                <use href="/sprite.svg#icon-star" />
-                              </svg>
-                              <p className={css.readMoreItemText}>
-                                {review.reviewer_rating}.0
-                              </p>
+                        <div className={css.readMoreItemTitleContainer}>
+                          <div className={css.readMoreItemTitleWrapper}>
+                            <div className={css.readMoreItemImgWrapper}>
+                              <img
+                                width="44"
+                                height="44"
+                                src="/default-photo.jpg"
+                                alt={review.reviewer_name}
+                              />
                             </div>
+                            <div className={css.ratingWrapper}>
+                              <p className={css.readMoreItemTitle}>
+                                {review.reviewer_name}
+                              </p>
+                              <div className={css.readMoreItemRating}>
+                                <svg
+                                  className={css.readMoreItemIcon}
+                                  width="16"
+                                  height="16"
+                                >
+                                  <use href="/sprite.svg#icon-star" />
+                                </svg>
+                                <p className={css.readMoreItemText}>
+                                  {review.reviewer_rating}.0
+                                </p>
+                              </div>
+                            </div>
+                          </div>
+                          <div className={css.readMoreComment}>
+                            <p className={css.readMoreCommentText}>
+                              {review.comment}
+                            </p>
                           </div>
                         </div>
                       </li>

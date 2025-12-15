@@ -166,6 +166,13 @@
 .readMoreItem {
 }
 
+.readMoreItemTitleContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin-bottom: 32px;
+}
+
 .readMoreItemTitleWrapper {
   display: flex;
   gap: 12px;
@@ -196,6 +203,12 @@
   font-weight: 500;
   font-size: 14px;
   line-height: 129%;
+}
+
+.readMoreCommentText {
+  font-weight: 500;
+
+  line-height: 150%;
 }
 
 /* Styles for Tablet devices */
