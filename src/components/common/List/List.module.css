@@ -174,10 +174,28 @@
 .ratingWrapper {
   display: flex;
   flex-direction: column;
+  gap: 2px;
 }
 
+.readMoreItemTitle {
+  font-weight: 500;
+  line-height: 150%;
+  color: #8a8a89;
+}
 .readMoreItemRating {
   display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.readMoreItemIcon {
+  fill: #ffc531;
+}
+
+.readMoreItemText {
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 129%;
 }
 
 /* Styles for Tablet devices */

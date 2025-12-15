@@ -115,8 +115,8 @@ const List = ({ teachers, loading }: ListProps) => {
                         <div className={css.readMoreItemTitleWrapper}>
                           <div className={css.readMoreItemImgWrapper}>
                             <img
-                              width="24"
-                              height="24"
+                              width="44"
+                              height="44"
                               src="/default-photo.jpg"
                               alt={review.reviewer_name}
                             />
@@ -133,7 +133,9 @@ const List = ({ teachers, loading }: ListProps) => {
                               >
                                 <use href="/sprite.svg#icon-star" />
                               </svg>
-                              <p>{review.reviewer_rating}.0</p>
+                              <p className={css.readMoreItemText}>
+                                {review.reviewer_rating}.0
+                              </p>
                             </div>
                           </div>
                         </div>
