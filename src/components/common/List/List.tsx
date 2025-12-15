@@ -158,6 +158,9 @@ const List = ({ teachers, loading }: ListProps) => {
                     </li>
                   ))}
                 </ul>
+                <button className={css.btnModal} type="button">
+                  Book trial lesson
+                </button>
               </div>
             </li>
           ))}

@@ -211,6 +211,29 @@
   line-height: 150%;
 }
 
+.btnModal {
+  margin-top: 32px;
+  font-weight: 700;
+  font-size: 18px;
+  line-height: 156%;
+  border-radius: 12px;
+  width: 232px;
+  height: 60px;
+  background-color: var(--color-profile);
+  transition: background 250ms linear, transform 250ms linear;
+}
+
+.btnModal:hover,
+.btnModal:focus {
+  background-color: var(--color-profile-second);
+  transform: translateY(-1px);
+}
+
+.btnModal:active {
+  background-color: var(--color-profile);
+  transform: scale(0.96) translateY(0);
+}
+
 /* Styles for Tablet devices */
 @media only screen and (min-width: 768px) {
   .listContainer {
@@ -227,7 +250,7 @@
 
   .listItem {
     gap: 18px;
-    padding: 16px;
+    padding: 32px;
   }
 
   .imgWrapper {
