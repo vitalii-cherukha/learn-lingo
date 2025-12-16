@@ -95,6 +95,7 @@ const FormBookTrial = ({ onSubmit, loading }: FormBookTrialProps) => {
           type="text"
           placeholder="Full Name"
           {...register("fullName")}
+          onFocus={() => clearErrors("fullName")}
           className={`${css.input} ${errors.fullName ? css.errorInput : ""}`}
         />
         {errors.fullName && (
@@ -107,6 +108,7 @@ const FormBookTrial = ({ onSubmit, loading }: FormBookTrialProps) => {
           type="email"
           placeholder="Email"
           {...register("email")}
+          onFocus={() => clearErrors("email")}
           className={`${css.input} ${errors.email ? css.errorInput : ""}`}
         />
         {errors.email && <p className={css.error}>{errors.email.message}</p>}
@@ -117,6 +119,7 @@ const FormBookTrial = ({ onSubmit, loading }: FormBookTrialProps) => {
           type="tel"
           placeholder="Phone number"
           {...register("phone")}
+          onFocus={() => clearErrors("phone")}
           className={`${css.input} ${errors.phone ? css.errorInput : ""}`}
         />
         {errors.phone && <p className={css.error}>{errors.phone.message}</p>}
