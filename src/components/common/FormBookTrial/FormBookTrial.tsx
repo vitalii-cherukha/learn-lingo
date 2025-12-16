@@ -2,6 +2,7 @@ import * as yup from "yup";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import css from "./FormBookTrial.module.css";
+import { BarLoader } from "react-spinners";
 
 interface FormBookTrialValues {
   purpose: string;
@@ -94,38 +95,44 @@ const FormBookTrial = ({ onSubmit, loading }: FormBookTrialProps) => {
           type="text"
           placeholder="Full Name"
           {...register("fullName")}
-          className={errors.fullName ? css.errorInput : ""}
+          className={`${css.input} ${errors.fullName ? css.errorInput : ""}`}
         />
         {errors.fullName && (
           <p className={css.error}>{errors.fullName.message}</p>
         )}
       </div>
 
-      {/* EMAIL */}
       <div className={css.inputWrapper}>
         <input
           type="email"
           placeholder="Email"
           {...register("email")}
-          className={errors.email ? css.errorInput : ""}
+          className={`${css.input} ${errors.email ? css.errorInput : ""}`}
         />
         {errors.email && <p className={css.error}>{errors.email.message}</p>}
       </div>
 
-      {/* PHONE */}
       <div className={css.inputWrapper}>
         <input
           type="tel"
           placeholder="Phone number"
           {...register("phone")}
-          className={errors.phone ? css.errorInput : ""}
+          className={`${css.input} ${errors.phone ? css.errorInput : ""}`}
         />
         {errors.phone && <p className={css.error}>{errors.phone.message}</p>}
       </div>
 
-      {/* BUTTON */}
-      <button type="submit" className={css.submitBtn}>
-        Book
+      <button className={css.btn} type="submit">
+        {!loading ? (
+          "Book"
+        ) : (
+          <BarLoader
+            className={css.loader}
+            color="#121417"
+            speedMultiplier={3}
+            width={100}
+          />
+        )}
       </button>
     </form>
   );
