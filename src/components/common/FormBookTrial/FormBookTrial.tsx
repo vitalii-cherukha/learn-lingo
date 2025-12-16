@@ -3,13 +3,7 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import css from "./FormBookTrial.module.css";
 import { BarLoader } from "react-spinners";
-
-interface FormBookTrialValues {
-  purpose: string;
-  fullName: string;
-  email: string;
-  phone: string;
-}
+import { FormBookTrialValues } from "../../../types";
 
 interface FormBookTrialProps {
   onSubmit: (data: FormBookTrialValues) => Promise<void>;

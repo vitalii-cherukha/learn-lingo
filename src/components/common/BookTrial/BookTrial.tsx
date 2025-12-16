@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Teacher, User } from "../../../types";
+import { FormBookTrialValues, Teacher } from "../../../types";
 import Modal from "../Modal/Modal";
 import css from "./BookTrial.module.css";
 import FormBookTrial from "../FormBookTrial/FormBookTrial";
@@ -18,7 +18,7 @@ const BookTrial = ({ isOpen, onClose, teacher }: BookTrialProps) => {
     return null;
   }
 
-  const onSubmit = async (user: User) => {
+  const onSubmit = async (user: FormBookTrialValues) => {
     setLoading(true);
     try {
       console.log(user);

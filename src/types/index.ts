@@ -1,3 +1,10 @@
+export interface FormBookTrialValues {
+  purpose: string;
+  fullName: string;
+  email: string;
+  phone: string;
+}
+
 export interface User {
   name: string;
   email: string;
