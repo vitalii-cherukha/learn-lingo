@@ -1,0 +1,55 @@
+.form {
+}
+
+.radioGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin-bottom: 24px;
+  cursor: pointer;
+}
+
+.radioLabel {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.radioInput {
+  position: absolute;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.customRadio {
+  position: relative;
+  width: 24px;
+  height: 24px;
+  display: inline-flex;
+}
+
+.icon {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.iconInactive {
+  fill: none;
+  stroke: #8a8a89;
+  opacity: 1;
+}
+
+.iconActive {
+  fill: none;
+  stroke: var(--color-profile);
+  opacity: 0;
+}
+
+.radioInput:checked + .customRadio .iconActive {
+  opacity: 1;
+}
+
+.radioInput:checked + .customRadio .iconInactive {
+  opacity: 0;
+}

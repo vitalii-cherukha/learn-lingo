@@ -2,7 +2,6 @@ import { useState } from "react";
 import { Teacher, User } from "../../../types";
 import Modal from "../Modal/Modal";
 import css from "./BookTrial.module.css";
-import { Form } from "react-router";
 import FormBookTrial from "../FormBookTrial/FormBookTrial";
 
 interface BookTrialProps {
@@ -56,6 +55,9 @@ const BookTrial = ({ isOpen, onClose, teacher }: BookTrialProps) => {
             </p>
           </div>
         </div>
+        <h3 className={css.formTitle}>
+          What is your main reason for learning English?
+        </h3>
         <FormBookTrial loading={loading} onSubmit={onSubmit} />
         <button onClick={onClose}>
           <svg className={css.closeIcon} width="32" height="32">

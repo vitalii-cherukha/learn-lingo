@@ -26,11 +26,11 @@
   <path stroke-linejoin="round" stroke-linecap="round" stroke-miterlimit="4" stroke-width="3.2"
     d="M18.667 9.333L12 16M12 16l6.667 6.667M12 16h16"/>
 </symbol>
-<symbol id="icon-radiobtn-active" viewBox="0 0 32 32">
+<symbol id="icon-radioBtn-active" viewBox="0 0 32 32">
 <path stroke-linejoin="miter" stroke-linecap="butt" stroke-miterlimit="4" stroke-width="2.6667" d="M16 4c6.627 0 12 5.373 12 12s-5.373 12-12 12c-6.627 0-12-5.373-12-12s5.373-12 12-12z"></path>
 <path d="M16 9.333c3.682 0 6.667 2.985 6.667 6.667s-2.985 6.667-6.667 6.667c-3.682 0-6.667-2.985-6.667-6.667s2.985-6.667 6.667-6.667z"></path>
 </symbol>
-<symbol id="icon-radiobtn" viewBox="0 0 32 32">
+<symbol id="icon-radioBtn" viewBox="0 0 32 32">
 <path stroke-linejoin="miter" stroke-linecap="butt" stroke-miterlimit="4" stroke-width="2.6667" d="M16 4c6.627 0 12 5.373 12 12s-5.373 12-12 12c-6.627 0-12-5.373-12-12s5.373-12 12-12z"></path>
 </symbol>
 <symbol id="icon-star" viewBox="0 0 32 32">
