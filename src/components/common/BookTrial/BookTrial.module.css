@@ -12,7 +12,7 @@
 }
 
 .text {
-  margin-bottom: 40px;
+  margin-bottom: 20px;
   line-height: 137%;
   color: rgba(18, 20, 23, 0.8);
 }
@@ -22,6 +22,30 @@
   top: 15px;
   right: 15px;
   stroke: var(--color-primary);
+}
+
+.teacherWrapper {
+  display: flex;
+  gap: 14px;
+}
+
+.nameWrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  margin-bottom: 40px;
+}
+
+.label {
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 133%;
+  color: #8a8a89;
+}
+
+.name {
+  font-weight: 500;
+  line-height: 150%;
 }
 
 /* Styles for Tablet devices */
