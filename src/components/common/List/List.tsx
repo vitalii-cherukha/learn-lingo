@@ -4,6 +4,7 @@ import { Teacher } from "../../../types";
 import css from "./List.module.css";
 import Loader from "../Loader/Loader";
 import PageTransition from "../PageTransition/PageTransition";
+import BookTrial from "../BookTrial/BookTrial";
 
 interface ListProps {
   teachers: Teacher[];
@@ -12,6 +13,13 @@ interface ListProps {
 
 const List = ({ teachers, loading }: ListProps) => {
   const [expandedIds, setExpandedIds] = useState<Set<string>>(new Set());
+  const [isOpenBookTrial, setIsOpenBookTrial] = useState(false);
+  const [selectedTeacher, setSelectedTeacher] = useState<Teacher | null>(null);
+
+  const handleBookTrial = (teacher: Teacher) => {
+    setSelectedTeacher(teacher);
+    setIsOpenBookTrial(true);
+  };
 
   const toggleExpanded = (id: string) => {
     setExpandedIds((prev) => {
@@ -169,7 +177,11 @@ const List = ({ teachers, loading }: ListProps) => {
                     ))}
                   </ul>
                   {isExpanded && (
-                    <button className={css.btnModal} type="button">
+                    <button
+                      onClick={() => handleBookTrial(teacher)}
+                      className={css.btnModal}
+                      type="button"
+                    >
                       Book trial lesson
                     </button>
                   )}
@@ -179,6 +191,15 @@ const List = ({ teachers, loading }: ListProps) => {
           })}
         </ul>
       </div>
+
+      <BookTrial
+        isOpen={isOpenBookTrial}
+        onClose={() => {
+          setIsOpenBookTrial(false);
+          setSelectedTeacher(null);
+        }}
+        teacher={selectedTeacher}
+      />
     </PageTransition>
   );
 };
