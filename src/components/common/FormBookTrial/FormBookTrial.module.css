@@ -2,6 +2,7 @@
 }
 
 .radioGroup {
+  position: relative;
   display: flex;
   flex-direction: column;
   gap: 16px;
@@ -10,6 +11,7 @@
 }
 
 .radioLabel {
+  /* position: relative; */
   display: flex;
   gap: 8px;
   align-items: center;
@@ -19,6 +21,14 @@
   position: absolute;
   opacity: 0;
   pointer-events: none;
+}
+
+.errorRadioCheck {
+  position: absolute;
+  font-size: 9px;
+  color: red;
+  top: 190px;
+  left: 0px;
 }
 
 .customRadio {
@@ -88,7 +98,7 @@
 
 .error {
   position: absolute;
-  font-size: 8px;
+  font-size: 9px;
   color: red;
   top: 57px;
   left: 5px;

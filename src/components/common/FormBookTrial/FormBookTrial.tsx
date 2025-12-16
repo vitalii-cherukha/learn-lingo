@@ -80,7 +80,7 @@ const FormBookTrial = ({ onSubmit, loading }: FormBookTrialProps) => {
           </label>
         ))}
         {errors.purpose && (
-          <p className={css.error}>{errors.purpose.message}</p>
+          <p className={css.errorRadioCheck}>{errors.purpose.message}</p>
         )}
       </div>
 
