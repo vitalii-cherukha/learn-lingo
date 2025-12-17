@@ -15,6 +15,7 @@ const List = ({ teachers, loading }: ListProps) => {
   const [expandedId, setExpandedId] = useState<string | null>(null);
   const [isOpenBookTrial, setIsOpenBookTrial] = useState(false);
   const [selectedTeacher, setSelectedTeacher] = useState<Teacher | null>(null);
+  const [onlineTeacher] = useState(true);
 
   const handleBookTrial = (teacher: Teacher) => {
     setSelectedTeacher(teacher);
@@ -45,6 +46,11 @@ const List = ({ teachers, loading }: ListProps) => {
                     src={teacher.avatar_url}
                     alt={teacher.name}
                     className={css.avatar}
+                  />
+                  <span
+                    className={`${css.onlineIcon} ${
+                      !onlineTeacher ? css.offlineIcon : ""
+                    }`}
                   />
                 </div>
                 <div className={css.teacherInfo}>
