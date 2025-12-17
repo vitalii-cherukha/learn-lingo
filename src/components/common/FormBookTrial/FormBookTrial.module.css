@@ -1,6 +1,23 @@
 .form {
 }
 
+@keyframes radioPop {
+  0% {
+    transform: scale(0.5);
+    opacity: 0;
+  }
+
+  70% {
+    transform: scale(1.15);
+    opacity: 1;
+  }
+
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
 .radioGroup {
   position: relative;
   display: flex;
@@ -11,7 +28,6 @@
 }
 
 .radioLabel {
-  /* position: relative; */
   display: flex;
   gap: 8px;
   align-items: center;
@@ -36,12 +52,22 @@
   width: 24px;
   height: 24px;
   display: inline-flex;
+  transition: transform 250ms linear;
+}
+
+.customRadio:hover {
+  transform: scale(1.05);
+}
+
+.customRadio:active {
+  transform: scale(1.1);
 }
 
 .icon {
   position: absolute;
   top: 0;
   left: 0;
+  cursor: pointer;
 }
 
 .iconInactive {
@@ -53,11 +79,13 @@
 .iconActive {
   fill: none;
   stroke: var(--color-profile);
+
   opacity: 0;
+  transform: scale(0.6);
 }
 
 .radioInput:checked + .customRadio .iconActive {
-  opacity: 1;
+  animation: radioPop 500ms ease-out forwards;
 }
 
 .radioInput:checked + .customRadio .iconInactive {
