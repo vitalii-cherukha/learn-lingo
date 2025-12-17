@@ -118,49 +118,52 @@ const List = ({ teachers, loading }: ListProps) => {
                   )}
 
                   {isExpanded && (
-                    <div className={css.readMoreWrapper}>
-                      <p className={css.readMoreText}>{teacher.experience}</p>
-                      <ul className={css.readMoreList}>
-                        {teacher.reviews.map((review, index) => (
-                          <li key={index} className={css.readMoreItem}>
-                            <div className={css.readMoreItemTitleContainer}>
-                              <div className={css.readMoreItemTitleWrapper}>
-                                <div className={css.readMoreItemImgWrapper}>
-                                  <img
-                                    width="44"
-                                    height="44"
-                                    src="/default-photo.jpg"
-                                    alt={review.reviewer_name}
-                                  />
-                                </div>
-                                <div className={css.ratingWrapper}>
-                                  <p className={css.readMoreItemTitle}>
-                                    {review.reviewer_name}
-                                  </p>
-                                  <div className={css.readMoreItemRating}>
-                                    <svg
-                                      className={css.readMoreItemIcon}
-                                      width="16"
-                                      height="16"
-                                    >
-                                      <use href="/sprite.svg#icon-star" />
-                                    </svg>
-                                    <p className={css.readMoreItemText}>
-                                      {review.reviewer_rating}.0
+                    <PageTransition>
+                      {" "}
+                      <div className={css.readMoreWrapper}>
+                        <p className={css.readMoreText}>{teacher.experience}</p>
+                        <ul className={css.readMoreList}>
+                          {teacher.reviews.map((review, index) => (
+                            <li key={index} className={css.readMoreItem}>
+                              <div className={css.readMoreItemTitleContainer}>
+                                <div className={css.readMoreItemTitleWrapper}>
+                                  <div className={css.readMoreItemImgWrapper}>
+                                    <img
+                                      width="44"
+                                      height="44"
+                                      src="/default-photo.jpg"
+                                      alt={review.reviewer_name}
+                                    />
+                                  </div>
+                                  <div className={css.ratingWrapper}>
+                                    <p className={css.readMoreItemTitle}>
+                                      {review.reviewer_name}
                                     </p>
+                                    <div className={css.readMoreItemRating}>
+                                      <svg
+                                        className={css.readMoreItemIcon}
+                                        width="16"
+                                        height="16"
+                                      >
+                                        <use href="/sprite.svg#icon-star" />
+                                      </svg>
+                                      <p className={css.readMoreItemText}>
+                                        {review.reviewer_rating}.0
+                                      </p>
+                                    </div>
                                   </div>
                                 </div>
+                                <div className={css.readMoreComment}>
+                                  <p className={css.readMoreCommentText}>
+                                    {review.comment}
+                                  </p>
+                                </div>
                               </div>
-                              <div className={css.readMoreComment}>
-                                <p className={css.readMoreCommentText}>
-                                  {review.comment}
-                                </p>
-                              </div>
-                            </div>
-                          </li>
-                        ))}
-                      </ul>
-                    </div>
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+                    </PageTransition>
                   )}
 
                   <ul className={css.levelList}>
