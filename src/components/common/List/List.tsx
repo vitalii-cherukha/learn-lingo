@@ -12,7 +12,7 @@ interface ListProps {
 }
 
 const List = ({ teachers, loading }: ListProps) => {
-  const [expandedIds, setExpandedIds] = useState<Set<string>>(new Set());
+  const [expandedId, setExpandedId] = useState<string | null>(null);
   const [isOpenBookTrial, setIsOpenBookTrial] = useState(false);
   const [selectedTeacher, setSelectedTeacher] = useState<Teacher | null>(null);
 
@@ -22,15 +22,7 @@ const List = ({ teachers, loading }: ListProps) => {
   };
 
   const toggleExpanded = (id: string) => {
-    setExpandedIds((prev) => {
-      const newSet = new Set(prev);
-      if (newSet.has(id)) {
-        newSet.delete(id);
-      } else {
-        newSet.add(id);
-      }
-      return newSet;
-    });
+    setExpandedId((prev) => (prev === id ? null : id));
   };
 
   if (loading) {
@@ -42,7 +34,7 @@ const List = ({ teachers, loading }: ListProps) => {
       <div className={css.listContainer}>
         <ul className={css.list}>
           {teachers.map((teacher) => {
-            const isExpanded = expandedIds.has(teacher.id || "");
+            const isExpanded = expandedId === teacher.id;
 
             return (
               <li key={teacher.id} className={css.listItem}>
@@ -116,12 +108,14 @@ const List = ({ teachers, loading }: ListProps) => {
                     </ul>
                   </div>
 
-                  <button
-                    className={css.btnOpen}
-                    onClick={() => toggleExpanded(teacher.id || "")}
-                  >
-                    Read more
-                  </button>
+                  {!isExpanded && (
+                    <button
+                      className={css.btnOpen}
+                      onClick={() => toggleExpanded(teacher.id!)}
+                    >
+                      Read more
+                    </button>
+                  )}
 
                   {isExpanded && (
                     <div className={css.readMoreWrapper}>
