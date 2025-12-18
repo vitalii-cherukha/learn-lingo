@@ -7,6 +7,7 @@ import PageTransition from "../PageTransition/PageTransition";
 import BookTrial from "../BookTrial/BookTrial";
 import { useAuthStore } from "../../../store/authStore";
 import LogIn from "../LogIn/LogIn";
+import toast from "react-hot-toast";
 
 interface ListProps {
   teachers: Teacher[];
@@ -65,8 +66,23 @@ const List = ({ teachers, loading }: ListProps) => {
                     onClick={() => {
                       if (!user) {
                         setIsOpenLogIn(true);
+                        toast("Please log in first!", {
+                          icon: "⚠️",
+                          style: {
+                            borderRadius: "10px",
+                            background: "#e8961bff", // Помаранчевий колір
+                            color: "#fff",
+                          },
+                        });
                         return;
                       }
+
+                      if (!isFav) {
+                        toast.success("Added to favorites!");
+                      } else {
+                        toast("Removed from favorites.", { icon: "🗑️" });
+                      }
+
                       toggleFavorite(teacher.id!);
                     }}
                     className={`${css.favoriteIcon} ${

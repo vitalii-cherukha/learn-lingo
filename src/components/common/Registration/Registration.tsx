@@ -4,6 +4,7 @@ import FormRegistration from "../FormRegistration/FormRegistration";
 import { User } from "../../../types";
 import { useState } from "react";
 import { useAuthStore } from "../../../store/authStore";
+import toast from "react-hot-toast";
 
 interface RegistrationProps {
   isOpen: boolean;
@@ -21,8 +22,9 @@ const Registration = ({ isOpen, onClose }: RegistrationProps) => {
     try {
       await register(data.email, data.password, data.name);
       onClose();
-    } catch (error) {
-      console.log(error);
+      toast.success("Registration complete!");
+    } catch {
+      toast.error("Oops! Something went wrong");
     } finally {
       setLoading(false);
     }

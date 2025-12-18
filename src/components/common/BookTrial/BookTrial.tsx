@@ -3,6 +3,7 @@ import { FormBookTrialValues, Teacher } from "../../../types";
 import Modal from "../Modal/Modal";
 import css from "./BookTrial.module.css";
 import FormBookTrial from "../FormBookTrial/FormBookTrial";
+import toast from "react-hot-toast";
 
 interface BookTrialProps {
   isOpen: boolean;
@@ -23,8 +24,9 @@ const BookTrial = ({ isOpen, onClose, teacher }: BookTrialProps) => {
     try {
       console.log(user);
       onClose();
-    } catch (error) {
-      console.log(error);
+      toast.success("Submitted successfully");
+    } catch {
+      toast.error("Oops! Something went wrong");
     } finally {
       setLoading(false);
     }

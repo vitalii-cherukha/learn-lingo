@@ -4,6 +4,7 @@ import FormLogIn from "../FormLogIn/FormLogIn";
 import Modal from "../Modal/Modal";
 import css from "./LogIn.module.css";
 import { UserLogIn } from "../../../types";
+import toast from "react-hot-toast";
 
 interface LogInProps {
   isOpen: boolean;
@@ -21,8 +22,12 @@ const LogIn = ({ isOpen, onClose }: LogInProps) => {
     try {
       await login(data.email, data.password);
       onClose();
+      toast.success("Logged in!");
     } catch (error) {
-      console.log(error);
+      const message =
+        error instanceof Error ? error.message : "Oops! Something went wrong";
+
+      toast.error(message);
     } finally {
       setLoading(false);
     }

@@ -7,6 +7,7 @@ import Header from "../../layout/Header/Header";
 import css from "./Teachers.module.css";
 import { FilterValues, Teacher } from "../../../types";
 import { filterTeachersAll } from "../../../firebase/database";
+import toast from "react-hot-toast";
 
 const Teachers = () => {
   const [teachers, setTeachers] = useState<Teacher[]>([]);
@@ -27,12 +28,8 @@ const Teachers = () => {
       try {
         const data = await filterTeachersAll(filters);
         setTeachers(data);
-      } catch (error: unknown) {
-        if (error instanceof Error) {
-          console.error("Помилка при завантаженні викладачів:", error.message);
-        } else {
-          console.error("Невідома помилка при завантаженні викладачів", error);
-        }
+      } catch {
+        toast.error("Failed to load teachers");
       } finally {
         setLoading(false);
       }

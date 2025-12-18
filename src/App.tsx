@@ -3,6 +3,7 @@ import Home from "./components/pages/Home/Home";
 import Teachers from "./components/pages/Teachers/Teachers";
 import NotFound from "./components/pages/NotFound/NotFound";
 import Favorites from "./components/pages/Favorites/Favorites";
+import { Toaster } from "react-hot-toast";
 
 function App() {
   return (
@@ -14,6 +15,7 @@ function App() {
         <Route path="/not-found" element={<NotFound />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
+      <Toaster position="top-right" reverseOrder={false} />
     </main>
   );
 }

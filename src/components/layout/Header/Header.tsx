@@ -6,6 +6,7 @@ import { useEffect, useState } from "react";
 import Registration from "../../common/Registration/Registration";
 import LogIn from "../../common/LogIn/LogIn";
 import { useAuthStore } from "../../../store/authStore";
+import toast from "react-hot-toast";
 
 interface HeaderProps {
   colorBg?: string;
@@ -64,6 +65,7 @@ const Header = ({ colorBg }: HeaderProps) => {
               type="button"
               onClick={() => {
                 logout();
+                toast.success("See you soon!");
               }}
             >
               <svg className={css.actionBtnLoginIcon} width="20" height="20">
@@ -152,6 +154,7 @@ const Header = ({ colorBg }: HeaderProps) => {
               onClick={() => {
                 logout();
                 setIsOpenBurgerMenu(false);
+                toast.success("See you soon!");
               }}
               className={css.burgerMenuActionBtnLogin}
               type="button"

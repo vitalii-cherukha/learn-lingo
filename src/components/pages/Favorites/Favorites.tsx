@@ -7,6 +7,7 @@ import css from "./Favorites.module.css";
 import { FilterValues, Teacher } from "../../../types";
 import { filterFavoriteTeachers } from "../../../firebase/database";
 import { useAuthStore } from "../../../store/authStore";
+import toast from "react-hot-toast";
 
 const Favorites = () => {
   const [teachers, setTeachers] = useState<Teacher[]>([]);
@@ -30,8 +31,8 @@ const Favorites = () => {
         // отримуємо favorite teachers з uid + фільтри
         const data = await filterFavoriteTeachers(user.uid, filters);
         setTeachers(data);
-      } catch (err) {
-        console.error("Помилка завантаження улюблених викладачів:", err);
+      } catch {
+        toast.error("Failed to load teachers");
       } finally {
         setLoading(false);
       }
