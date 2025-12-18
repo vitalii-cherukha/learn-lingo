@@ -225,7 +225,7 @@ const List = ({ teachers, loading }: ListProps) => {
         }}
         teacher={selectedTeacher}
       />
-      <LogIn isOpen={isOpenLogIn} onClose={() => setIsOpenLogIn(false)} />;
+      <LogIn isOpen={isOpenLogIn} onClose={() => setIsOpenLogIn(false)} />
     </PageTransition>
   );
 };

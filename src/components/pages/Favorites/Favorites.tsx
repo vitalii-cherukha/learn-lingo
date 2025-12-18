@@ -38,7 +38,7 @@ const Favorites = () => {
     };
 
     fetchFilteredFavorites();
-  }, [user?.uid, filters]);
+  }, [user, filters]);
 
   return (
     <section className={css.bg}>
