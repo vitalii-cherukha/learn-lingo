@@ -16,6 +16,7 @@ const List = ({ teachers, loading }: ListProps) => {
   const [isOpenBookTrial, setIsOpenBookTrial] = useState(false);
   const [selectedTeacher, setSelectedTeacher] = useState<Teacher | null>(null);
   const [onlineTeacher] = useState(true);
+  const [favorite, setFavorite] = useState(true);
 
   const handleBookTrial = (teacher: Teacher) => {
     setSelectedTeacher(teacher);
@@ -54,6 +55,22 @@ const List = ({ teachers, loading }: ListProps) => {
                   />
                 </div>
                 <div className={css.teacherInfo}>
+                  <svg
+                    onClick={() => {
+                      if (favorite) {
+                        setFavorite(false);
+                      } else {
+                        setFavorite(true);
+                      }
+                    }}
+                    className={`${css.favoriteIcon} ${
+                      favorite ? css.favoriteIconActive : ""
+                    }`}
+                    width="26"
+                    height="26"
+                  >
+                    <use href="/sprite.svg#icon-favorite" />
+                  </svg>
                   <div className={css.teacherContainer}>
                     <div className={css.titleWrapper}>
                       <p className={css.titleText}>Languages</p>

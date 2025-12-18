@@ -8,6 +8,7 @@
 }
 
 .listItem {
+  position: relative;
   display: flex;
   gap: 16px;
   padding: 12px;
@@ -51,10 +52,28 @@
 
 .teacherContainer {
   display: flex;
-  gap: 22px;
+  gap: 10px;
 }
 
 .teacherInfo {
+}
+
+.favoriteIcon {
+  position: absolute;
+  width: 18px;
+  height: 18px;
+  top: 12px;
+  right: 12px;
+  stroke: var(--color-primary);
+  fill: none;
+  cursor: pointer;
+  transition: fill 250ms linear, stroke 250ms linear, transform 250ms linear;
+}
+
+.favoriteIconActive {
+  fill: var(--color-profile);
+  stroke: var(--color-profile);
+  transform: scale(1.1);
 }
 
 .titleWrapper {
@@ -82,13 +101,13 @@
   display: flex;
   justify-content: center;
   flex-direction: column;
-  gap: 4px;
+  gap: 2px;
 }
 
 .infoListItem {
   display: flex;
   align-items: center;
-  gap: 4px;
+  gap: 2px;
   font-weight: 500;
   font-size: 12px;
   line-height: 150%;
@@ -258,15 +277,22 @@
   }
 
   .teacherContainer {
-    gap: 18px;
+    gap: 12px;
   }
 
   .teacherInfo {
   }
 
+  .favoriteIcon {
+    width: 22px;
+    height: 22px;
+    top: 24px;
+    right: 24px;
+  }
+
   .listItem {
     gap: 18px;
-    padding: 32px;
+    padding: 24px;
   }
 
   .imgWrapper {
@@ -297,14 +323,14 @@
   .infoList {
     flex-direction: row;
     flex-wrap: wrap;
-    gap: 16px;
+    gap: 8px;
   }
 
   .infoListItem {
     position: relative;
     gap: 4px;
     font-size: 14px;
-    padding-right: 16px;
+    padding-right: 8px;
   }
 
   .infoListItem:nth-child(1)::after,
@@ -364,6 +390,13 @@
   }
 
   .teacherInfo {
+  }
+
+  .favoriteIcon {
+    width: 26px;
+    height: 26px;
+    top: 24px;
+    right: 24px;
   }
 
   .listItem {
