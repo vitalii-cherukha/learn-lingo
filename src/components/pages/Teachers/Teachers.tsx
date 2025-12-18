@@ -1,21 +1,30 @@
 import { useEffect, useState } from "react";
-import { getAllTeachers } from "../../../firebase/database";
+import { filterTeachers } from "../../../firebase/database";
 import FilterBar from "../../common/FilterBar/FilterBar";
 import List from "../../common/List/List";
 import Container from "../../layout/Container/Container";
 import Header from "../../layout/Header/Header";
 import css from "./Teachers.module.css";
-import { Teacher } from "../../../types";
+import { FilterValues, Teacher } from "../../../types";
 
 const Teachers = () => {
   const [teachers, setTeachers] = useState<Teacher[]>([]);
+  const [filters, setFilters] = useState<FilterValues>({
+    language: "French",
+    level: "A1 Beginner",
+    price: "30",
+  });
   const [loading, setLoading] = useState(true);
 
+  const handleFilterChange = (newFilters: FilterValues) => {
+    setFilters(newFilters);
+  };
+
   useEffect(() => {
-    const fetchTeachers = async () => {
+    const fetchFilteredTeachers = async () => {
       try {
         setLoading(true);
-        const data = await getAllTeachers();
+        const data = await filterTeachers(filters);
         setTeachers(data);
       } catch (error) {
         console.error("Error fetching teachers:", error);
@@ -24,14 +33,14 @@ const Teachers = () => {
       }
     };
 
-    fetchTeachers();
-  }, []);
+    fetchFilteredTeachers();
+  }, [filters]);
 
   return (
     <section className={css.bg}>
       <Header colorBg="#f8f8f8" />
       <Container>
-        <FilterBar />
+        <FilterBar onFilterChange={handleFilterChange} />
         <List teachers={teachers} loading={loading} />
       </Container>
     </section>

@@ -1,3 +1,8 @@
+export interface FilterValues {
+  language: string;
+  level: string;
+  price: string;
+}
 export interface FormBookTrialValues {
   purpose: string;
   fullName: string;

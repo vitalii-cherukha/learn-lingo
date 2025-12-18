@@ -1,12 +1,6 @@
-import {
-  ref,
-  get,
-  onValue,
-  DataSnapshot,
-  Unsubscribe,
-} from "firebase/database";
+import { ref, get, DataSnapshot } from "firebase/database";
 import { database } from "./config";
-import { Teacher } from "../types";
+import { FilterValues, Teacher } from "../types";
 
 // Отримати всіх викладачів
 export const getAllTeachers = async (): Promise<Teacher[]> => {
@@ -42,42 +36,34 @@ export const getTeacherById = async (teacherId: string): Promise<Teacher> => {
   }
 };
 
-// Real-time listener для всіх викладачів
-export const subscribeToTeachers = (
-  callback: (teachers: Teacher[]) => void
-): Unsubscribe => {
-  const teachersRef = ref(database, "/");
-
-  return onValue(teachersRef, (snapshot: DataSnapshot) => {
-    const teachers: Teacher[] = [];
-    if (snapshot.exists()) {
-      snapshot.forEach((childSnapshot) => {
-        teachers.push({
-          id: childSnapshot.key!,
-          ...childSnapshot.val(),
-        } as Teacher);
-      });
-    }
-    callback(teachers);
-  });
-};
-
-// Фільтрація викладачів по мові
-export const getTeachersByLanguage = async (
-  language: string
+// Комбінована фільтрація викладачів
+export const filterTeachers = async (
+  filters: FilterValues
 ): Promise<Teacher[]> => {
   const teachers = await getAllTeachers();
 
-  return teachers.filter(
-    (teacher) => teacher.languages && teacher.languages.includes(language)
-  );
-};
+  return teachers.filter((teacher) => {
+    // Фільтр по мові
+    if (filters.language) {
+      if (!teacher.languages?.includes(filters.language)) {
+        return false;
+      }
+    }
 
-// Фільтрація викладачів по рівню
-export const getTeachersByLevel = async (level: string): Promise<Teacher[]> => {
-  const teachers = await getAllTeachers();
+    // Фільтр по рівню
+    if (filters.level) {
+      if (!teacher.levels?.includes(filters.level)) {
+        return false;
+      }
+    }
 
-  return teachers.filter(
-    (teacher) => teacher.levels && teacher.levels.includes(level)
-  );
+    // Фільтр по ціні
+    if (filters.price) {
+      if (teacher.price_per_hour !== Number(filters.price)) {
+        return false;
+      }
+    }
+
+    return true;
+  });
 };
