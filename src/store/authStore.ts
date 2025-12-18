@@ -16,18 +16,26 @@ interface AuthUser {
 
 interface AuthState {
   user: AuthUser | null;
+  favorites: string[];
 
   register: (email: string, password: string, name?: string) => Promise<void>;
   login: (email: string, password: string) => Promise<void>;
   logout: () => Promise<void>;
   initAuth: () => void;
+
+  addFavorite: (teacherId: string) => void;
+  removeFavorite: (teacherId: string) => void;
+  toggleFavorite: (teacherId: string) => void;
+  isFavorite: (teacherId: string) => boolean;
+  clearFavorites: () => void;
 }
 
 export const useAuthStore = create<AuthState>()(
   devtools(
     persist(
-      (set) => ({
+      (set, get) => ({
         user: null,
+        favorites: [],
 
         register: async (email, password, name) => {
           const res = await createUserWithEmailAndPassword(
@@ -49,6 +57,9 @@ export const useAuthStore = create<AuthState>()(
 
         logout: async () => {
           await signOut(auth);
+          set({
+            user: null,
+          });
         },
 
         initAuth: () => {
@@ -60,7 +71,6 @@ export const useAuthStore = create<AuthState>()(
               ) {
                 return state;
               }
-
               return {
                 user: firebaseUser
                   ? {
@@ -72,11 +82,52 @@ export const useAuthStore = create<AuthState>()(
             });
           });
         },
+
+        addFavorite: (teacherId: string) => {
+          set((state) => {
+            if (state.favorites.includes(teacherId)) {
+              return state;
+            }
+            return {
+              favorites: [...state.favorites, teacherId],
+            };
+          });
+        },
+
+        removeFavorite: (teacherId: string) => {
+          set((state) => ({
+            favorites: state.favorites.filter((id) => id !== teacherId),
+          }));
+        },
+
+        toggleFavorite: (teacherId: string) => {
+          set((state) => {
+            const isFav = state.favorites.includes(teacherId);
+            if (isFav) {
+              return {
+                favorites: state.favorites.filter((id) => id !== teacherId),
+              };
+            } else {
+              return {
+                favorites: [...state.favorites, teacherId],
+              };
+            }
+          });
+        },
+
+        isFavorite: (teacherId: string) => {
+          return get().favorites.includes(teacherId);
+        },
+
+        clearFavorites: () => {
+          set({ favorites: [] });
+        },
       }),
       {
         name: "auth-store",
         partialize: (state) => ({
           user: state.user,
+          favorites: state.favorites,
         }),
       }
     )
