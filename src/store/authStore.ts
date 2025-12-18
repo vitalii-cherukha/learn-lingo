@@ -9,6 +9,7 @@ import {
   User,
 } from "firebase/auth";
 import { ref, get, update, DataSnapshot } from "firebase/database";
+import { FirebaseError } from "firebase/app";
 
 interface AuthUser {
   uid: string;
@@ -53,19 +54,44 @@ export const useAuthStore = create<AuthState>()(
         },
 
         login: async (email, password) => {
-          const res = await signInWithEmailAndPassword(auth, email, password);
-          const uid = res.user.uid;
+          try {
+            const res = await signInWithEmailAndPassword(auth, email, password);
+            const uid = res.user.uid;
 
-          const snap: DataSnapshot = await get(
-            ref(database, `users/${uid}/favorites`)
-          );
-          const favorites: string[] = snap.exists()
-            ? Object.keys(snap.val() || {})
-            : [];
+            const snap = await get(ref(database, `users/${uid}/favorites`));
+            const favorites: string[] = snap.exists()
+              ? Object.keys(snap.val() || {})
+              : [];
 
-          set({
-            user: { uid, email: res.user.email, favorites },
-          });
+            set({
+              user: {
+                uid,
+                email: res.user.email,
+                favorites,
+              },
+            });
+          } catch (error: unknown) {
+            let message = "Помилка входу";
+
+            if (error instanceof FirebaseError) {
+              switch (error.code) {
+                case "auth/user-not-found":
+                  message = "Користувач з таким email не зареєстрований";
+                  break;
+                case "auth/wrong-password":
+                  message = "Неправильний пароль";
+                  break;
+                case "auth/invalid-email":
+                  message = "Некоректний email";
+                  break;
+                case "auth/user-disabled":
+                  message = "Акаунт заблокований";
+                  break;
+              }
+            }
+
+            throw new Error(message);
+          }
         },
 
         logout: async () => {

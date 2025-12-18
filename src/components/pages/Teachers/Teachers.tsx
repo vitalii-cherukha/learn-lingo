@@ -1,11 +1,12 @@
 import { useEffect, useState } from "react";
-import { filterTeachers } from "../../../firebase/database";
+
 import FilterBar from "../../common/FilterBar/FilterBar";
 import List from "../../common/List/List";
 import Container from "../../layout/Container/Container";
 import Header from "../../layout/Header/Header";
 import css from "./Teachers.module.css";
 import { FilterValues, Teacher } from "../../../types";
+import { filterTeachersAll } from "../../../firebase/database";
 
 const Teachers = () => {
   const [teachers, setTeachers] = useState<Teacher[]>([]);
@@ -22,12 +23,16 @@ const Teachers = () => {
 
   useEffect(() => {
     const fetchFilteredTeachers = async () => {
+      setLoading(true);
       try {
-        setLoading(true);
-        const data = await filterTeachers(filters);
+        const data = await filterTeachersAll(filters);
         setTeachers(data);
-      } catch (error) {
-        console.error("Error fetching teachers:", error);
+      } catch (error: unknown) {
+        if (error instanceof Error) {
+          console.error("Помилка при завантаженні викладачів:", error.message);
+        } else {
+          console.error("Невідома помилка при завантаженні викладачів", error);
+        }
       } finally {
         setLoading(false);
       }

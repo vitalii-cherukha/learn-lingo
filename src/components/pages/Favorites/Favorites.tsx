@@ -4,34 +4,47 @@ import List from "../../common/List/List";
 import Container from "../../layout/Container/Container";
 import Header from "../../layout/Header/Header";
 import css from "./Favorites.module.css";
-import { getAllTeachers } from "../../../firebase/database";
-import { Teacher } from "../../../types";
+import { FilterValues, Teacher } from "../../../types";
+import { filterFavoriteTeachers } from "../../../firebase/database";
+import { useAuthStore } from "../../../store/authStore";
 
 const Favorites = () => {
   const [teachers, setTeachers] = useState<Teacher[]>([]);
+  const [filters, setFilters] = useState<FilterValues>({
+    language: "French",
+    level: "A1 Beginner",
+    price: "30",
+  });
   const [loading, setLoading] = useState(true);
 
+  const user = useAuthStore((state) => state.user); // отримуємо uid користувача
+
+  const handleFilterChange = (newFilters: FilterValues) =>
+    setFilters(newFilters);
+
   useEffect(() => {
-    const fetchTeachers = async () => {
+    const fetchFilteredFavorites = async () => {
+      if (!user) return; // без авторизованого користувача нічого не робимо
+      setLoading(true);
       try {
-        setLoading(true);
-        const data = await getAllTeachers();
+        // отримуємо favorite teachers з uid + фільтри
+        const data = await filterFavoriteTeachers(user.uid, filters);
         setTeachers(data);
-      } catch (error) {
-        console.error("Error fetching teachers:", error);
+      } catch (err) {
+        console.error("Помилка завантаження улюблених викладачів:", err);
       } finally {
         setLoading(false);
       }
     };
 
-    fetchTeachers();
-  }, []);
+    fetchFilteredFavorites();
+  }, [user?.uid, filters]);
 
   return (
     <section className={css.bg}>
       <Header colorBg="#f8f8f8" />
       <Container>
-        <FilterBar />
+        <FilterBar onFilterChange={handleFilterChange} />
         <List teachers={teachers} loading={loading} />
       </Container>
     </section>
