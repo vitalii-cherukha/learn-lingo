@@ -39,7 +39,7 @@ const Header = ({ colorBg }: HeaderProps) => {
       <header className={css.header}>
         <Link to={"/"} onClick={handleCloseClick} className={css.logoWrapper}>
           <svg className={css.logoIcon} width="28" height="28">
-            <use href="/icon.svg" />
+            <use href="/sprite.svg#icon" />
           </svg>
           <span className={css.logoText}>LearnLingo</span>
         </Link>
