@@ -32,6 +32,11 @@ button {
   padding: 0;
   cursor: pointer;
   font-family: inherit;
+
+  appearance: none;
+  -webkit-appearance: none;
+  color: inherit;
+  text-decoration: none;
 }
 
 img {
