@@ -5,6 +5,8 @@ import css from "./List.module.css";
 import Loader from "../Loader/Loader";
 import PageTransition from "../PageTransition/PageTransition";
 import BookTrial from "../BookTrial/BookTrial";
+import { useAuthStore } from "../../../store/authStore";
+import LogIn from "../LogIn/LogIn";
 
 interface ListProps {
   teachers: Teacher[];
@@ -16,7 +18,10 @@ const List = ({ teachers, loading }: ListProps) => {
   const [isOpenBookTrial, setIsOpenBookTrial] = useState(false);
   const [selectedTeacher, setSelectedTeacher] = useState<Teacher | null>(null);
   const [onlineTeacher] = useState(true);
-  const [favorite, setFavorite] = useState(true);
+  const [isOpenLogIn, setIsOpenLogIn] = useState(false);
+
+  const toggleFavorite = useAuthStore((state) => state.toggleFavorite);
+  const user = useAuthStore((state) => state.user);
 
   const handleBookTrial = (teacher: Teacher) => {
     setSelectedTeacher(teacher);
@@ -37,6 +42,7 @@ const List = ({ teachers, loading }: ListProps) => {
         <ul className={css.list}>
           {teachers.map((teacher) => {
             const isExpanded = expandedId === teacher.id;
+            const isFav = user?.favorites?.includes(teacher.id!) ?? false;
 
             return (
               <li key={teacher.id} className={css.listItem}>
@@ -57,14 +63,14 @@ const List = ({ teachers, loading }: ListProps) => {
                 <div className={css.teacherInfo}>
                   <svg
                     onClick={() => {
-                      if (favorite) {
-                        setFavorite(false);
-                      } else {
-                        setFavorite(true);
+                      if (!user) {
+                        setIsOpenLogIn(true);
+                        return;
                       }
+                      toggleFavorite(teacher.id!);
                     }}
                     className={`${css.favoriteIcon} ${
-                      favorite ? css.favoriteIconActive : ""
+                      isFav ? css.favoriteIconActive : ""
                     }`}
                     width="26"
                     height="26"
@@ -211,7 +217,6 @@ const List = ({ teachers, loading }: ListProps) => {
           })}
         </ul>
       </div>
-
       <BookTrial
         isOpen={isOpenBookTrial}
         onClose={() => {
@@ -220,6 +225,7 @@ const List = ({ teachers, loading }: ListProps) => {
         }}
         teacher={selectedTeacher}
       />
+      <LogIn isOpen={isOpenLogIn} onClose={() => setIsOpenLogIn(false)} />;
     </PageTransition>
   );
 };

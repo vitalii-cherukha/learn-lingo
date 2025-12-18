@@ -2,9 +2,8 @@ import { ref, get, DataSnapshot } from "firebase/database";
 import { database } from "./config";
 import { FilterValues, Teacher } from "../types";
 
-// Отримати всіх викладачів
 export const getAllTeachers = async (): Promise<Teacher[]> => {
-  const teachersRef = ref(database, "/");
+  const teachersRef = ref(database, "/teachers");
   const snapshot: DataSnapshot = await get(teachersRef);
 
   if (snapshot.exists()) {
@@ -21,9 +20,8 @@ export const getAllTeachers = async (): Promise<Teacher[]> => {
   }
 };
 
-// Отримати викладача по ID
 export const getTeacherById = async (teacherId: string): Promise<Teacher> => {
-  const teacherRef = ref(database, `/${teacherId}`);
+  const teacherRef = ref(database, `/teachers/${teacherId}`);
   const snapshot: DataSnapshot = await get(teacherRef);
 
   if (snapshot.exists()) {
@@ -36,28 +34,24 @@ export const getTeacherById = async (teacherId: string): Promise<Teacher> => {
   }
 };
 
-// Комбінована фільтрація викладачів
 export const filterTeachers = async (
   filters: FilterValues
 ): Promise<Teacher[]> => {
   const teachers = await getAllTeachers();
 
   return teachers.filter((teacher) => {
-    // Фільтр по мові
     if (filters.language) {
       if (!teacher.languages?.includes(filters.language)) {
         return false;
       }
     }
 
-    // Фільтр по рівню
     if (filters.level) {
       if (!teacher.levels?.includes(filters.level)) {
         return false;
       }
     }
 
-    // Фільтр по ціні
     if (filters.price) {
       if (teacher.price_per_hour !== Number(filters.price)) {
         return false;

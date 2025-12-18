@@ -1,41 +1,36 @@
 import { create } from "zustand";
 import { devtools, persist } from "zustand/middleware";
+import { auth, database } from "../firebase/config";
 import {
   signInWithEmailAndPassword,
   signOut,
   createUserWithEmailAndPassword,
   onAuthStateChanged,
+  User,
 } from "firebase/auth";
-import { auth } from "../firebase/config";
+import { ref, get, update, DataSnapshot } from "firebase/database";
 
 interface AuthUser {
   uid: string;
   email: string | null;
   name?: string;
+  favorites: string[];
 }
 
 interface AuthState {
   user: AuthUser | null;
-  favorites: string[];
-
   register: (email: string, password: string, name?: string) => Promise<void>;
   login: (email: string, password: string) => Promise<void>;
   logout: () => Promise<void>;
   initAuth: () => void;
-
-  addFavorite: (teacherId: string) => void;
-  removeFavorite: (teacherId: string) => void;
-  toggleFavorite: (teacherId: string) => void;
-  isFavorite: (teacherId: string) => boolean;
-  clearFavorites: () => void;
+  toggleFavorite: (teacherId: string) => Promise<void>;
 }
 
 export const useAuthStore = create<AuthState>()(
   devtools(
     persist(
-      (set, get) => ({
+      (set) => ({
         user: null,
-        favorites: [],
 
         register: async (email, password, name) => {
           const res = await createUserWithEmailAndPassword(
@@ -43,92 +38,137 @@ export const useAuthStore = create<AuthState>()(
             email,
             password
           );
+          const uid = res.user.uid;
+
+          await update(ref(database, `users/${uid}`), { name, favorites: {} });
+
           set({
-            user: { uid: res.user.uid, email: res.user.email, name },
+            user: {
+              uid,
+              email: res.user.email,
+              name,
+              favorites: [],
+            },
           });
         },
 
         login: async (email, password) => {
           const res = await signInWithEmailAndPassword(auth, email, password);
+          const uid = res.user.uid;
+
+          const snap: DataSnapshot = await get(
+            ref(database, `users/${uid}/favorites`)
+          );
+          const favorites: string[] = snap.exists()
+            ? Object.keys(snap.val() || {})
+            : [];
+
           set({
-            user: { uid: res.user.uid, email: res.user.email },
+            user: { uid, email: res.user.email, favorites },
           });
         },
 
         logout: async () => {
           await signOut(auth);
-          set({
-            user: null,
-          });
+          set({ user: null });
         },
 
         initAuth: () => {
-          onAuthStateChanged(auth, (firebaseUser) => {
-            set((state) => {
-              if (
-                (firebaseUser && state.user?.uid === firebaseUser.uid) ||
-                (!firebaseUser && state.user === null)
-              ) {
-                return state;
-              }
-              return {
-                user: firebaseUser
-                  ? {
-                      uid: firebaseUser.uid,
-                      email: firebaseUser.email,
-                    }
-                  : null,
-              };
+          onAuthStateChanged(auth, async (firebaseUser: User | null) => {
+            if (!firebaseUser) {
+              set({ user: null });
+              return;
+            }
+
+            const snap: DataSnapshot = await get(
+              ref(database, `users/${firebaseUser.uid}/favorites`)
+            );
+            const favorites: string[] = snap.exists()
+              ? Object.keys(snap.val() || {})
+              : [];
+
+            set({
+              user: {
+                uid: firebaseUser.uid,
+                email: firebaseUser.email,
+                favorites,
+              },
             });
           });
         },
 
-        addFavorite: (teacherId: string) => {
+        //   const currentUser = auth.currentUser;
+        //   if (!currentUser) return;
+
+        //   const uid = currentUser.uid;
+
+        //   const snap: DataSnapshot = await get(
+        //     ref(database, `users/${uid}/favorites`)
+        //   );
+        //   const currentFavorites: Record<string, boolean> = snap.exists()
+        //     ? snap.val()
+        //     : {};
+
+        //   const isFav = !!currentFavorites[teacherId];
+        //   const updatedFavorites = { ...currentFavorites, [teacherId]: !isFav };
+
+        //   await update(
+        //     ref(database, `users/${uid}/favorites`),
+        //     updatedFavorites
+        //   );
+
+        //   set((state) => ({
+        //     user: state.user
+        //       ? {
+        //           ...state.user,
+        //           favorites: Object.keys(updatedFavorites).filter(
+        //             (id) => updatedFavorites[id]
+        //           ),
+        //         }
+        //       : null,
+        //   }));
+        // },
+        toggleFavorite: async (teacherId: string) => {
+          const user = auth.currentUser;
+          if (!user) return;
+
+          const uid = user.uid;
+          const favRef = ref(database, `users/${uid}/favorites/${teacherId}`);
+
+          const snap = await get(favRef);
+
+          if (snap.exists()) {
+            // якщо є — видаляємо
+            await update(ref(database, `users/${uid}/favorites`), {
+              [teacherId]: null,
+            });
+          } else {
+            // якщо нема — додаємо
+            await update(ref(database, `users/${uid}/favorites`), {
+              [teacherId]: true,
+            });
+          }
+
+          // локальний state
           set((state) => {
-            if (state.favorites.includes(teacherId)) {
-              return state;
-            }
+            if (!state.user) return state;
+
+            const isFav = state.user.favorites.includes(teacherId);
+
             return {
-              favorites: [...state.favorites, teacherId],
+              user: {
+                ...state.user,
+                favorites: isFav
+                  ? state.user.favorites.filter((id) => id !== teacherId)
+                  : [...state.user.favorites, teacherId],
+              },
             };
           });
-        },
-
-        removeFavorite: (teacherId: string) => {
-          set((state) => ({
-            favorites: state.favorites.filter((id) => id !== teacherId),
-          }));
-        },
-
-        toggleFavorite: (teacherId: string) => {
-          set((state) => {
-            const isFav = state.favorites.includes(teacherId);
-            if (isFav) {
-              return {
-                favorites: state.favorites.filter((id) => id !== teacherId),
-              };
-            } else {
-              return {
-                favorites: [...state.favorites, teacherId],
-              };
-            }
-          });
-        },
-
-        isFavorite: (teacherId: string) => {
-          return get().favorites.includes(teacherId);
-        },
-
-        clearFavorites: () => {
-          set({ favorites: [] });
         },
       }),
       {
         name: "auth-store",
-        partialize: (state) => ({
-          user: state.user,
-          favorites: state.favorites,
-        }),
+        partialize: (state) => ({ user: state.user }),
       }
     )
   )
