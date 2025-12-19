@@ -231,6 +231,7 @@ const List = ({ teachers, loading }: ListProps) => {
               </li>
             );
           })}
+          <button className={css.btnPagination}>Load more</button>
         </ul>
       </div>
       <BookTrial
