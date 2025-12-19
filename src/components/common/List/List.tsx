@@ -14,12 +14,18 @@ interface ListProps {
   loading: boolean;
 }
 
+const ITEMS_PER_PAGE = 4;
+
 const List = ({ teachers, loading }: ListProps) => {
   const [expandedId, setExpandedId] = useState<string | null>(null);
   const [isOpenBookTrial, setIsOpenBookTrial] = useState(false);
   const [selectedTeacher, setSelectedTeacher] = useState<Teacher | null>(null);
   const [onlineTeacher] = useState(true);
   const [isOpenLogIn, setIsOpenLogIn] = useState(false);
+  const [visibleCount, setVisibleCount] = useState(ITEMS_PER_PAGE);
+
+  const visibleTeachers = teachers.slice(0, visibleCount);
+  const hasMore = visibleCount < teachers.length;
 
   const toggleFavorite = useAuthStore((state) => state.toggleFavorite);
   const user = useAuthStore((state) => state.user);
@@ -33,7 +39,9 @@ const List = ({ teachers, loading }: ListProps) => {
     setExpandedId((prev) => (prev === id ? null : id));
   };
 
-  const handleClickPagination = () => {};
+  const handleLoadMore = () => {
+    setVisibleCount((prev) => prev + ITEMS_PER_PAGE);
+  };
 
   if (loading) {
     return <Loader />;
@@ -43,7 +51,7 @@ const List = ({ teachers, loading }: ListProps) => {
     <PageTransition>
       <div className={css.listContainer}>
         <ul className={css.list}>
-          {teachers.map((teacher) => {
+          {visibleTeachers.map((teacher) => {
             const isExpanded = expandedId === teacher.id;
             const isFav = user?.favorites?.includes(teacher.id!) ?? false;
 
@@ -233,15 +241,12 @@ const List = ({ teachers, loading }: ListProps) => {
               </li>
             );
           })}
-          {teachers.length > 4 && (
-            <button
-              onClick={handleClickPagination}
-              className={css.btnPagination}
-            >
-              Load more
-            </button>
-          )}
         </ul>
+        {hasMore && (
+          <button onClick={handleLoadMore} className={css.btnPagination}>
+            Load more
+          </button>
+        )}
       </div>
       <BookTrial
         isOpen={isOpenBookTrial}
