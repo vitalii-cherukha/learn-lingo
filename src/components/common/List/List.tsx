@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Teacher } from "../../../types";
 
 import css from "./List.module.css";
@@ -39,6 +39,25 @@ const List = ({ teachers, loading }: ListProps) => {
     setExpandedId((prev) => (prev === id ? null : id));
   };
 
+  // Додайте цей ефект всередині компонента List
+  useEffect(() => {
+    // Якщо ми тільки завантажили першу сторінку (напр. 4 елементи), не скролимо
+    if (visibleCount <= ITEMS_PER_PAGE) return;
+
+    // Обчислюємо індекс першого "нового" елемента
+    const firstNewItemIndex = visibleCount - ITEMS_PER_PAGE;
+    const firstNewItem = document.querySelector(
+      `[data-index="${firstNewItemIndex}"]`
+    );
+
+    if (firstNewItem) {
+      firstNewItem.scrollIntoView({
+        behavior: "smooth",
+        block: "start",
+      });
+    }
+  }, [visibleCount]); // Спрацює щоразу, коли змінюється visibleCount
+
   const handleLoadMore = () => {
     setVisibleCount((prev) => prev + ITEMS_PER_PAGE);
   };
@@ -51,12 +70,12 @@ const List = ({ teachers, loading }: ListProps) => {
     <PageTransition>
       <div className={css.listContainer}>
         <ul className={css.list}>
-          {visibleTeachers.map((teacher) => {
+          {visibleTeachers.map((teacher, index) => {
             const isExpanded = expandedId === teacher.id;
             const isFav = user?.favorites?.includes(teacher.id!) ?? false;
 
             return (
-              <li key={teacher.id} className={css.listItem}>
+              <li key={teacher.id} className={css.listItem} data-index={index}>
                 <div className={css.imgWrapper}>
                   <img
                     width="96"
