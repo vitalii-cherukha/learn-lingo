@@ -33,6 +33,8 @@ const List = ({ teachers, loading }: ListProps) => {
     setExpandedId((prev) => (prev === id ? null : id));
   };
 
+  const handleClickPagination = () => {};
+
   if (loading) {
     return <Loader />;
   }
@@ -231,7 +233,14 @@ const List = ({ teachers, loading }: ListProps) => {
               </li>
             );
           })}
-          <button className={css.btnPagination}>Load more</button>
+          {teachers.length > 4 && (
+            <button
+              onClick={handleClickPagination}
+              className={css.btnPagination}
+            >
+              Load more
+            </button>
+          )}
         </ul>
       </div>
       <BookTrial
