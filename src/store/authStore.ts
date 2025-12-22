@@ -164,18 +164,15 @@ export const useAuthStore = create<AuthState>()(
           const snap = await get(favRef);
 
           if (snap.exists()) {
-            // якщо є — видаляємо
             await update(ref(database, `users/${uid}/favorites`), {
               [teacherId]: null,
             });
           } else {
-            // якщо нема — додаємо
             await update(ref(database, `users/${uid}/favorites`), {
               [teacherId]: true,
             });
           }
 
-          // локальний state
           set((state) => {
             if (!state.user) return state;
 
