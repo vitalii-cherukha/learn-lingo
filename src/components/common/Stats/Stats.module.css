@@ -39,9 +39,6 @@
   color: rgba(18, 20, 23, 0.7);
 }
 
-.icon-dashed-border {
-}
-
 /* Styles for Tablet devices */
 @media only screen and (min-width: 768px) {
   .statsWrapper {
@@ -57,9 +54,6 @@
   .item {
     display: flex;
     gap: 16px;
-  }
-
-  .itemTitle {
   }
 
   .itemText {
@@ -81,9 +75,6 @@
   .item {
     display: flex;
     gap: 16px;
-  }
-
-  .itemTitle {
   }
 
   .itemText {
