@@ -9,6 +9,8 @@ import { filterFavoriteTeachers } from "../../../firebase/database";
 import { useAuthStore } from "../../../store/authStore";
 import toast from "react-hot-toast";
 
+import { Navigate } from "react-router";
+
 const Favorites = () => {
   const [teachers, setTeachers] = useState<Teacher[]>([]);
   const [filters, setFilters] = useState<FilterValues>({
@@ -40,6 +42,10 @@ const Favorites = () => {
 
     fetchFilteredFavorites();
   }, [user, filters]);
+
+  if (!user) {
+    return <Navigate to="/not-found" replace />;
+  }
 
   return (
     <section className={css.bg}>
